@@ -1,10 +1,18 @@
-import logo from '../assets/logo.png'
+import Icon from '../components/Icon'
+import Header from '../components/vendedor_header'
+import Sidebar from '../components/vendedor_sidebar'
 
 const metrics = [
-  { label: 'Ventas del mes', value: '$ 18.420', change: '+12.4%' },
-  { label: 'Inventario activo', value: '1.284', change: '96 SKU' },
-  { label: 'Cuentas por cobrar', value: '$ 4.730', change: '8 vencen' },
-  { label: 'Utilidad estimada', value: '$ 6.180', change: '+8.1%' },
+  { label: 'Ventas de hoy', value: '$ 1.240', detail: '+8 ventas registradas', icon: 'sales' },
+  { label: 'Productos vendidos', value: '86', detail: '12 categorias activas', icon: 'box' },
+  { label: 'Alertas activas', value: '5', detail: '2 requieren revision', icon: 'alerts' },
+] as const
+
+const latestSales = [
+  { code: '#V-1048', client: 'Finca Santa Rosa', amount: '$ 340', status: 'Pagado' },
+  { code: '#V-1047', client: 'Carlos Mendoza', amount: '$ 125', status: 'Pendiente' },
+  { code: '#V-1046', client: 'AgroCampo Norte', amount: '$ 780', status: 'Pagado' },
+  { code: '#V-1045', client: 'Maria Zambrano', amount: '$ 96', status: 'Pagado' },
 ]
 
 const lowStock = [
@@ -13,165 +21,150 @@ const lowStock = [
   { product: 'Sacos de yute', stock: 18, min: 30 },
 ]
 
-const movements = [
-  { type: 'Ingreso', detail: 'Compra a proveedor AgroSol', amount: '$ 2.850' },
-  { type: 'Egreso', detail: 'Pago de transporte y logistica', amount: '$ 420' },
-  { type: 'Venta', detail: 'Factura #FAC-1048', amount: '$ 1.260' },
+const alerts = [
+  { label: 'Stock bajo', value: '2', tone: 'danger' },
+  { label: 'Creditos por vencer', value: '3', tone: 'warning' },
+  { label: 'Ventas sin revisar', value: '4', tone: 'info' },
 ]
 
-const Icon = ({ name }: { name: 'box' | 'cash' | 'file' | 'chart' }) => {
-  const paths = {
-    box: (
-      <>
-        <path d="m4 8 8-4 8 4-8 4-8-4Z" />
-        <path d="m4 8v8l8 4 8-4V8" />
-        <path d="M12 12v8" />
-      </>
-    ),
-    cash: (
-      <>
-        <rect x="3" y="6" width="18" height="12" rx="2" />
-        <circle cx="12" cy="12" r="3" />
-        <path d="M6 9v.01M18 15v.01" />
-      </>
-    ),
-    file: (
-      <>
-        <path d="M7 3h7l3 3v15H7z" />
-        <path d="M14 3v4h4" />
-        <path d="M9 12h6M9 16h6" />
-      </>
-    ),
-    chart: (
-      <>
-        <path d="M4 19h16" />
-        <path d="M7 16v-5M12 16V7M17 16v-8" />
-      </>
-    ),
-  }
-
-  return (
-    <svg className="home-icon" viewBox="0 0 24 24" aria-hidden="true">
-      {paths[name]}
-    </svg>
-  )
-}
+const expirations = [
+  { product: 'Insecticida foliar', detail: 'Vence en 5 dias', tone: 'danger' },
+  { product: 'Abono premium', detail: 'Vence en 12 dias', tone: 'warning' },
+  { product: 'Fungicida cobre', detail: 'Vence en 28 dias', tone: 'muted' },
+  { product: 'Vitaminas de cultivo', detail: 'Vence en 35 dias', tone: 'muted' },
+]
 
 function Home() {
   return (
-    <main className="home-page">
-      <aside className="sidebar" aria-label="Navegacion principal">
-        <div className="logo">
-          <img src={logo} alt="Logo de FCVT" />
-          <div className="logo-text">
-            <strong>AgroMarket</strong>
-            <br />
-            <span>Inventario y contabilidad</span>
-          </div>
-        </div>
-
-        <nav className="nav-list">
-          <a className="active" href="#resumen">
-            Resumen
-          </a>
-          <a href="#inventario">Inventario</a>
-          <a href="#contabilidad">Contabilidad</a>
-          <a href="#facturas">Facturas</a>
-          <a href="#reportes">Reportes</a>
-        </nav>
-      </aside>
+    <main className="seller-home" id="inicio">
+      <Sidebar activeHref="#inicio" userName="Vendedor" userDetail="Junio 15, 2026" />
 
       <section className="workspace">
-        <header className="topbar">
-          <div>
-            <p className="eyebrow">Panel operativo</p>
-            <h1>Control de inventario y finanzas</h1>
-          </div>
-          <div className="actions">
-            <button className="button secondary" type="button">
-              <Icon name="file" />
-              Nuevo asiento
-            </button>
-            <button className="button primary" type="button">
-              <Icon name="cash" />
-              Registrar venta
-            </button>
-          </div>
-        </header>
+        <Header
+          eyebrow="Panel de vendedor"
+          title="Resumen de ventas"
+          searchLabel="Buscar producto, cliente o venta"
+        />
 
-        <section className="metric-grid" id="resumen" aria-label="Indicadores">
-          {metrics.map((metric) => (
+        <section className="seller-summary" aria-label="Indicadores del vendedor">
+          {metrics.map((metric, index) => (
             <article className="metric-card" key={metric.label}>
               <span>{metric.label}</span>
               <strong>{metric.value}</strong>
-              <small>{metric.change}</small>
+              <small>{metric.detail}</small>
+              <div className={`metric-icon metric-icon-${index}`}>
+                <Icon name={metric.icon} />
+              </div>
             </article>
           ))}
         </section>
 
-        <section className="dashboard-grid">
-          <article className="panel inventory-panel" id="inventario">
+        <section className="seller-dashboard-grid">
+          <article className="panel latest-sales" id="ventas">
             <div className="panel-header">
               <div>
-                <p className="eyebrow">Inventario</p>
-                <h2>Productos bajo minimo</h2>
+                <p className="eyebrow">Actividad reciente</p>
+                <h2>Ultimas ventas</h2>
               </div>
-              <Icon name="box" />
+              <button className="text-button" type="button">
+                Ver historial
+              </button>
             </div>
-            <div className="stock-list">
-              {lowStock.map((item) => (
-                <div className="stock-row" key={item.product}>
-                  <div>
-                    <strong>{item.product}</strong>
-                    <span>
-                      Stock actual {item.stock} / minimo {item.min}
-                    </span>
-                  </div>
-                  <meter min="0" max={item.min} value={item.stock} />
+
+            <div className="sales-table" aria-label="Ultimas ventas registradas">
+              <div className="sales-row sales-head">
+                <span>Codigo</span>
+                <span>Cliente</span>
+                <span>Total</span>
+                <span>Estado</span>
+                <span>Ver</span>
+              </div>
+
+              {latestSales.map((sale) => (
+                <div className="sales-row" key={sale.code}>
+                  <strong>{sale.code}</strong>
+                  <span>{sale.client}</span>
+                  <span>{sale.amount}</span>
+                  <span className={sale.status === 'Pendiente' ? 'status-pill pending' : 'status-pill'}>
+                    {sale.status}
+                  </span>
+                  <button className="table-action" type="button" aria-label={`Ver venta ${sale.code}`}>
+                   <Icon name="eye" />
+                  </button>
                 </div>
               ))}
             </div>
           </article>
 
-          <article className="panel accounting-panel" id="contabilidad">
-            <div className="panel-header">
-              <div>
-                <p className="eyebrow">Contabilidad</p>
-                <h2>Flujo de caja semanal</h2>
+          <div className="seller-side-column">
+            <article className="panel" id="escanear">
+              <div className="panel-header">
+                <div>
+                  <p className="eyebrow">Inventario</p>
+                  <h2>Stock bajo</h2>
+                </div>
+                <Icon name="inventory" />
               </div>
-              <Icon name="chart" />
-            </div>
-            <div className="cash-chart" aria-label="Grafico de flujo de caja">
-              <span style={{ height: '42%' }} />
-              <span style={{ height: '66%' }} />
-              <span style={{ height: '52%' }} />
-              <span style={{ height: '78%' }} />
-              <span style={{ height: '58%' }} />
-              <span style={{ height: '88%' }} />
-              <span style={{ height: '71%' }} />
-            </div>
-            <div className="balance-row">
-              <span>Saldo disponible</span>
-              <strong>$ 12.940</strong>
-            </div>
-          </article>
 
-          <article className="panel wide-panel" id="facturas">
+              <div className="stock-list compact-stock-list">
+                {lowStock.map((item) => (
+                  <div className="stock-row compact-stock-row" key={item.product}>
+                    <div>
+                      <strong>{item.product}</strong>
+                      <span>
+                        {item.stock}/{item.min}
+                      </span>
+                    </div>
+                    <meter min="0" max={item.min} value={item.stock} />
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article className="panel" id="creditos">
+              <div className="panel-header">
+                <div>
+                  <p className="eyebrow">Alertas</p>
+                  <h2>Pendientes</h2>
+                </div>
+                <Icon name="bell" />
+              </div>
+
+              <div className="alert-count">
+                <strong>9</strong>
+                <span>eventos por revisar</span>
+              </div>
+
+              <div className="alert-list">
+                {alerts.map((alert) => (
+                  <div className={`alert-row ${alert.tone}`} key={alert.label}>
+                    <span>{alert.label}</span>
+                    <strong>{alert.value}</strong>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </div>
+
+          <article className="panel active-alerts-panel" id="historial">
             <div className="panel-header">
               <div>
-                <p className="eyebrow">Movimientos</p>
-                <h2>Actividad reciente</h2>
+                <p className="eyebrow">Vencimientos</p>
+                <h2>Productos proximos a vencer</h2>
               </div>
               <button className="text-button" type="button">
-                Ver todo
+                Revisar lote
               </button>
             </div>
-            <div className="movement-table">
-              {movements.map((movement) => (
-                <div className="movement-row" key={movement.detail}>
-                  <span className="movement-type">{movement.type}</span>
-                  <strong>{movement.detail}</strong>
-                  <span>{movement.amount}</span>
+
+            <div className="expiry-grid">
+              {expirations.map((item) => (
+                <div className={`expiry-card ${item.tone}`} key={item.product}>
+                  <Icon name="calendar" />
+                  <div>
+                    <strong>{item.product}</strong>
+                    <span>{item.detail}</span>
+                  </div>
                 </div>
               ))}
             </div>
