@@ -1709,3 +1709,148 @@ meter::-webkit-meter-optimum-value {
   width: 34px;
   height: 34px;
 }
+
+.login-page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background: #edf3f1;
+  color: #14221d;
+}
+
+.login-panel {
+  width: min(420px, 100%);
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #dbe4df;
+  border-radius: 8px;
+  box-shadow: 0 18px 50px rgba(20, 34, 29, 0.12);
+}
+
+.login-eyebrow,
+.login-copy,
+.login-panel h1 {
+  margin: 0;
+}
+
+.login-eyebrow {
+  color: #0b5a3d;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.login-panel h1 {
+  margin-top: 6px;
+  color: #07140f;
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.login-copy {
+  margin-top: 8px;
+  color: #607168;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.login-form {
+  display: grid;
+  gap: 14px;
+}
+
+.login-form label {
+  display: grid;
+  gap: 7px;
+  color: #34433c;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.login-form input {
+  min-height: 44px;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  background: #f9fbfc;
+  color: #16231e;
+  font: inherit;
+  font-size: 14px;
+  padding: 0 12px;
+}
+
+.login-form button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: #003d28;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background: #0b5a3d;
+}
+
+.login-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #ffe4e0;
+  color: #a82720;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.login-users {
+  display: grid;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.login-users div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3f6f2;
+}
+
+.login-users strong,
+.login-users span {
+  display: block;
+}
+
+.login-users span {
+  color: #607168;
+  font-size: 13px;
+}
+
+.seller-footer {
+  display: grid;
+  gap: 10px;
+}
+
+.seller-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f5fbf7;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.seller-logout:hover {
+  background: rgba(255, 255, 255, 0.16);
+}

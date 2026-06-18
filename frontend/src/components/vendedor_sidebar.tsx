@@ -49,12 +49,19 @@ function Sidebar({
         </nav>
       </div>
 
-      <div className="seller-profile" aria-label="Vendedor activo">
-        <span className="avatar">{userName.charAt(0)}</span>
-        <div>
-          <strong>{userName}</strong>
-          <span>{userDetail}</span>
+      <div className="seller-footer">
+        <div className="seller-profile" aria-label="Vendedor activo">
+          <span className="avatar">{userName.charAt(0)}</span>
+          <div>
+            <strong>{userName}</strong>
+            <span>{userDetail}</span>
+          </div>
         </div>
+
+        <a className="seller-logout" href="#cerrar-sesion">
+          <Icon name="logout" />
+          Cerrar sesión
+        </a>
       </div>
     </aside>
   )

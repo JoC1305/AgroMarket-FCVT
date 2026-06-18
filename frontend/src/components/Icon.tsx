@@ -15,6 +15,8 @@ export type IconName =
   | 'box'
   | 'calendar'
   | 'eye'
+  | 'logout'
+
 
 const paths: Record<IconName, ReactNode> = {
   inicio: (
@@ -34,10 +36,10 @@ const paths: Record<IconName, ReactNode> = {
   ),
   clients: (
     <>
-      <path d="M16 21v-2a4 4 0 0 0-8 0v2" />
-      <circle cx="12" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+      <path d="M3 20a5 5 0 0 1 10 0" />
+      <path d="M17 10a2.5 2.5 0 1 0 0-5" />
+      <path d="M15 15a4 4 0 0 1 6 3.5" />
     </>
   ),
   sales: (
@@ -108,6 +110,13 @@ const paths: Record<IconName, ReactNode> = {
       <circle cx="12" cy="12" r="3" />
     </>
   ),
+  logout: (
+    <>
+      <path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4" />
+      <path d="M15 16l4-4-4-4" />
+      <path d="M8 12h11" />
+    </>
+  )
 }
 
 function Icon({ name }: { name: IconName }) {

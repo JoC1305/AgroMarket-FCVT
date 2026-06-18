@@ -135,7 +135,7 @@ function AdminSidebar({ activePage = 'inicio' }: AdminSidebarProps) {
 
       <a className="admin-logout" href="#cerrar-sesion">
         <SidebarIcon name="logout" />
-        <span>Cerrar sesion</span>
+        <span>Cerrar sesión</span>
       </a>
     </aside>
   )
