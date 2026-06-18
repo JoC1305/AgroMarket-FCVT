@@ -150,16 +150,25 @@
 }
 
 .seller-search {
-  min-height: 44px;
+  width: min(380px, 100%);
+  min-height: 42px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
-  padding: 0 14px;
-  border: 1px solid #dfe6e1;
-  border-radius: 8px;
+  padding: 0 16px;
   background: #ffffff;
-  color: #65746d;
+  border: 1px solid #e4e8ef;
+  border-radius: 8px;
+  color: #0f5137;
+}
+
+.seller-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #1e2a24;
+  font: inherit;
   font-size: 14px;
 }
 

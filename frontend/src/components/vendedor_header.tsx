@@ -25,8 +25,7 @@ function Header({
       </div>
 
       <div className="seller-search">
-        <span aria-hidden="true">{searchLabel}</span>
-        <small>{searchShortcut}</small>
+        <input type="search" placeholder="Buscar cliente o producto..." aria-label="Buscar reporte o producto" />
       </div>
 
       <div className="actions seller-actions">

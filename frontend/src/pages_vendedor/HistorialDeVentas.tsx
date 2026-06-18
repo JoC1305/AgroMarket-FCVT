@@ -97,8 +97,7 @@ function HistorialDeVentas() {
           </div>
 
           <div className="seller-search">
-            <span>Filtrar por cliente, rango de fecha o estado</span>
-            <small>Cliente / Fecha / Estado</small>
+            <input type="search" placeholder="Buscar venta, cliente o producto..." aria-label="Buscar venta,cliente o producto" />
           </div>
 
           <div className="actions">
