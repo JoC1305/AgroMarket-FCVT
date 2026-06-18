@@ -1,8 +1,8 @@
-import Home from './pages_admin/home'
+import HistorialDeVentas from './pages_vendedor/HistorialDeVentas'
 import './App.css'
 
 function App() {
-  return <Home />
+  return <HistorialDeVentas />
 }
 
 export default App
