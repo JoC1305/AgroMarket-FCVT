@@ -1,4 +1,4 @@
-import logo from '../assets/logo.png'
+﻿import logo from '../assets/logo.png'
 import Icon, { type IconName } from './Icon'
 
 type SidebarItem = {
@@ -11,7 +11,7 @@ const sidebarItems: SidebarItem[] = [
   { label: 'Inicio', href: '#inicio', icon: 'inicio' },
   { label: 'Inventario', href: '#inventario', icon: 'inventory' },
   { label: 'Clientes', href: '#clientes', icon: 'clients' },
-  { label: 'Ventas', href: '#ventas', icon: 'sales' },
+  { label: 'Ventas', href: '#vendedor-ventas', icon: 'sales' },
   { label: 'Alertas', href: '#alertas', icon: 'alerts' },
   { label: 'Compras', href: '#compras', icon: 'shopping' },
 ]

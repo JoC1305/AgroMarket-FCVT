@@ -1,4 +1,4 @@
-import Header from '../components/vendedor_header'
+﻿import Header from '../components/vendedor_header'
 import Icon from '../components/Icon'
 import Sidebar from '../components/vendedor_sidebar'
 
@@ -48,7 +48,7 @@ const salesHistory = [
 function HistorialDeVentas() {
   return (
     <main className="seller-home">
-      <Sidebar activeHref="#ventas" userName="Vendedor" userDetail="Junio 17, 2026" />
+      <Sidebar activeHref="#vendedor-ventas" userName="Vendedor" userDetail="Junio 17, 2026" />
 
       <section className="workspace">
         <Header
