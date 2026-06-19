@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
-import type { FormEvent } from 'react'
+import { type FormEvent, useEffect, useState } from 'react'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import AdminHeader from './components/AdminHeader'
 import AdminSidebar from './components/AdminSidebar'
+import AdminCompras from './pages_admin/Compras'
 import AdminHome from './pages_admin/home'
-import AdminVentas from './pages_admin/Ventas'
 import AdminInventario from './pages_admin/Inventario'
-import SellerHome from './pages_vendedor/home'
+import AdminVentas from './pages_admin/Ventas'
 import HistorialDeVentas from './pages_vendedor/HistorialDeVentas'
+import SellerHome from './pages_vendedor/home'
 import './App.css'
 
 type UserRole = 'admin' | 'seller'
@@ -34,15 +35,12 @@ const testUsers: Record<string, TestUser> = {
 }
 
 const pageTitles: Record<string, string> = {
-  inventario: 'Inventario',
-  compras: 'Compras',
   creditos: 'Creditos',
   clientes: 'Clientes',
   proveedores: 'Proveedores',
   usuarios: 'Usuarios',
+  configuracion: 'Configuracion',
 }
-
-const getActivePage = () => window.location.hash.replace('#', '') || 'inicio'
 
 function getStoredSession() {
   const savedRole = window.localStorage.getItem('agromarket-role') as UserRole | null
@@ -57,6 +55,7 @@ function getStoredSession() {
 
 function Login({ onLogin }: { onLogin: (session: Session) => void }) {
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -74,8 +73,8 @@ function Login({ onLogin }: { onLogin: (session: Session) => void }) {
     const session = { name: user.name, role: user.role }
     window.localStorage.setItem('agromarket-user', session.name)
     window.localStorage.setItem('agromarket-role', session.role)
-    window.location.hash = '#inicio'
     onLogin(session)
+    navigate(session.role === 'admin' ? '/admin/principal' : '/ventas')
   }
 
   return (
@@ -152,53 +151,55 @@ function AdminPlaceholder({ page }: { page: string }) {
   )
 }
 
-function App() {
-  const [session, setSession] = useState<Session | null>(getStoredSession)
-  const [activePage, setActivePage] = useState(getActivePage)
-
+function Logout({ onLogout }: { onLogout: () => void }) {
   useEffect(() => {
-    const handleHashChange = () => setActivePage(getActivePage())
-
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [])
-
-  useEffect(() => {
-    if (activePage !== 'cerrar-sesion') {
-      return
-    }
-
     window.localStorage.removeItem('agromarket-user')
     window.localStorage.removeItem('agromarket-role')
-    setSession(null)
-    window.location.hash = ''
-  }, [activePage])
+    onLogout()
+  }, [onLogout])
+
+  return <Navigate to="/" replace />
+}
+
+function App() {
+  const [session, setSession] = useState<Session | null>(getStoredSession)
 
   if (!session) {
-    return <Login onLogin={setSession} />
+    return (
+      <Routes>
+        <Route path="*" element={<Login onLogin={setSession} />} />
+      </Routes>
+    )
   }
 
   if (session.role === 'seller') {
-    if (activePage === 'ventas' || activePage === 'vendedor-ventas') {
-      return <HistorialDeVentas />
-    }
-
-    return <SellerHome />
+    return (
+      <Routes>
+        <Route path="/" element={<Navigate to="/ventas" replace />} />
+        <Route path="/ventas" element={<HistorialDeVentas />} />
+        <Route path="/logout" element={<Logout onLogout={() => setSession(null)} />} />
+        <Route path="*" element={<SellerHome />} />
+      </Routes>
+    )
   }
 
-  if (activePage === 'admin' || activePage === 'inicio') {
-    return <AdminHome />
-  }
-
-  if (activePage === 'ventas') {
-    return <AdminVentas />
-  }
-
-  if (activePage === 'inventario') {
-    return <AdminInventario />
-  }
-
-  return <AdminPlaceholder page={activePage} />
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/admin/principal" replace />} />
+      <Route path="/admin" element={<Navigate to="/admin/principal" replace />} />
+      <Route path="/admin/principal" element={<AdminHome />} />
+      <Route path="/admin/ventas" element={<AdminVentas />} />
+      <Route path="/admin/inventario" element={<AdminInventario />} />
+      <Route path="/admin/compras" element={<AdminCompras />} />
+      <Route path="/admin/creditos" element={<AdminPlaceholder page="creditos" />} />
+      <Route path="/admin/clientes" element={<AdminPlaceholder page="clientes" />} />
+      <Route path="/admin/proveedores" element={<AdminPlaceholder page="proveedores" />} />
+      <Route path="/admin/usuarios" element={<AdminPlaceholder page="usuarios" />} />
+      <Route path="/admin/configuracion" element={<AdminPlaceholder page="configuracion" />} />
+      <Route path="/logout" element={<Logout onLogout={() => setSession(null)} />} />
+      <Route path="*" element={<Navigate to="/admin/principal" replace />} />
+    </Routes>
+  )
 }
 
 export default App

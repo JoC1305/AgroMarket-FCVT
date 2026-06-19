@@ -14,6 +14,9 @@ export type IconName =
   | 'trend'
   | 'calendar'
   | 'eye'
+  | 'edit'
+  | 'trash'
+  | 'more'
   | 'logout'
   | 'credits'
   | 'users'
@@ -106,6 +109,27 @@ const paths: Record<IconName, ReactNode> = {
     <>
       <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
       <circle cx="12" cy="12" r="3" />
+    </>
+  ),
+  edit: (
+    <>
+      <path d="M12 20h9" />
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+    </>
+  ),
+  trash: (
+    <>
+      <path d="M3 6h18" />
+      <path d="M8 6V4h8v2" />
+      <path d="M19 6l-1 14H6L5 6" />
+      <path d="M10 11v5M14 11v5" />
+    </>
+  ),
+  more: (
+    <>
+      <circle cx="12" cy="5" r="1" />
+      <circle cx="12" cy="12" r="1" />
+      <circle cx="12" cy="19" r="1" />
     </>
   ),
   logout: (

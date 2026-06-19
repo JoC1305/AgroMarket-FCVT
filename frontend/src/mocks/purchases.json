@@ -1,0 +1,68 @@
+[
+  {
+    "id": "CMP-001",
+    "purchaseDate": "2026-06-18",
+    "product": "Arroz Premium 1kg",
+    "sku": "ARR-BB21",
+    "quantity": 500,
+    "unit": "Unid.",
+    "provider": "Distribuidora Nacional",
+    "purchasePrice": 1250,
+    "status": "recibido"
+  },
+  {
+    "id": "CMP-002",
+    "purchaseDate": "2026-06-18",
+    "product": "Leche Entera 1L",
+    "sku": "LEC-092",
+    "quantity": 200,
+    "unit": "Unid.",
+    "provider": "Lacteos del Norte",
+    "purchasePrice": 4200,
+    "status": "en-camino"
+  },
+  {
+    "id": "CMP-003",
+    "purchaseDate": "2026-06-15",
+    "product": "Huevos Docena",
+    "sku": "HUE-445",
+    "quantity": 150,
+    "unit": "Cajas",
+    "provider": "Granja San Jose",
+    "purchasePrice": 15700,
+    "status": "recibido"
+  },
+  {
+    "id": "CMP-004",
+    "purchaseDate": "2026-06-12",
+    "product": "Aceite Vegetal 1L",
+    "sku": "ACE-002",
+    "quantity": 100,
+    "unit": "Unid.",
+    "provider": "Distribuidora Nacional",
+    "purchasePrice": 2300,
+    "status": "cancelado"
+  },
+  {
+    "id": "CMP-005",
+    "purchaseDate": "2026-06-09",
+    "product": "Azucar Blanca 1kg",
+    "sku": "AZU-104",
+    "quantity": 300,
+    "unit": "Unid.",
+    "provider": "Comercial Manabi",
+    "purchasePrice": 980,
+    "status": "pendiente"
+  },
+  {
+    "id": "CMP-006",
+    "purchaseDate": "2026-05-28",
+    "product": "Cafe Molido 400g",
+    "sku": "CAF-330",
+    "quantity": 90,
+    "unit": "Unid.",
+    "provider": "Cosechas del Valle",
+    "purchasePrice": 1850,
+    "status": "recibido"
+  }
+]
