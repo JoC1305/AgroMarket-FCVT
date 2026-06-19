@@ -1,0 +1,12 @@
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\bin\Debug\net10.0\Dominio.deps.json
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\bin\Debug\net10.0\Dominio.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\bin\Debug\net10.0\Dominio.pdb
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\Dominio.AssemblyInfoInputs.cache
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\Dominio.AssemblyInfo.cs
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\Dominio.sourcelink.json
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\Dominio.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\refint\Dominio.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\Dominio.pdb
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\Dominio\obj\Debug\net10.0\ref\Dominio.dll

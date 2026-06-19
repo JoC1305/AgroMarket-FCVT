@@ -1,0 +1,13 @@
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\bin\Debug\net10.0\backend.ServiceDefaults.deps.json
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\bin\Debug\net10.0\backend.ServiceDefaults.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\bin\Debug\net10.0\backend.ServiceDefaults.pdb
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.AssemblyInfo.cs
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.sourcelink.json
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\refint\backend.ServiceDefaults.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\backend.ServiceDefaults.pdb
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.ServiceDefaults\obj\Debug\net10.0\ref\backend.ServiceDefaults.dll

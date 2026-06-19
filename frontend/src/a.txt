@@ -1,0 +1,30 @@
+
+
+
+@media (max-width: 1180px)
+
+.scanner-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .selected-product-panel,
+  .mock-sale-panel {
+    grid-column: auto;
+  }
+
+
+
+
+@media (max-width: 640px)
+
+  .mock-code-list {
+    grid-template-columns: 1fr;
+  }
+
+  .scanner-frame {
+    min-height: 260px;
+  }
+
+  .mock-sale-line {
+    grid-template-columns: 1fr;
+  }
