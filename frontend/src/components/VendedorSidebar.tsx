@@ -1,20 +1,22 @@
-﻿import logo from '../assets/logo.png'
+﻿import { NavLink } from 'react-router-dom'
+import logo from '../assets/logo.png'
 import Icon, { type IconName } from './Icon'
+import '../styles/seller.css'
 
 type SidebarItem = {
   label: string
-  href: string
+  to: string
   icon: IconName
 }
 
 const sidebarItems: SidebarItem[] = [
-  { label: 'Inicio', href: '#inicio', icon: 'home' },
-  { label: 'Inventario', href: '#inventario', icon: 'inventory' },
-  { label: 'Escanear', href: '#escanear', icon: 'scan' },
-  { label: 'Clientes', href: '#clientes', icon: 'clients' },
-  { label: 'Ventas', href: '#vendedor-ventas', icon: 'sales' },
-  { label: 'Alertas', href: '#alertas', icon: 'alerts' },
-  { label: 'Compras', href: '#compras', icon: 'shopping' },
+  { label: 'Inicio', to: '/inicio', icon: 'home' },
+  { label: 'Inventario', to: '/productos', icon: 'inventory' },
+  { label: 'Clientes', to: '/clientes', icon: 'clients' },
+  { label: 'Escanear', to: '/escanear', icon: 'scan' },
+  { label: 'Ventas', to: '/ventas', icon: 'sales' },
+  { label: 'Alertas', to: '/alertas', icon: 'alerts' },
+  { label: 'Compras', to: '/compras', icon: 'shopping' },
 ]
 
 type SidebarProps = {
@@ -25,7 +27,7 @@ type SidebarProps = {
 }
 
 function Sidebar({
-  activeHref = sidebarItems[0]?.href,
+  activeHref = '/inicio',
   brandName = 'AgroMarket - FCVT',
   userName = 'Vendedor',
   userDetail = 'Junio 15, 2026',
@@ -42,10 +44,10 @@ function Sidebar({
 
         <nav className="nav-list seller-nav">
           {sidebarItems.map((item) => (
-            <a className={item.href === activeHref ? 'active' : undefined} href={item.href} key={item.href}>
+            <NavLink className={item.to === activeHref ? 'active' : undefined} to={item.to} key={item.to}>
               <Icon name={item.icon} />
               {item.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
       </div>
@@ -59,10 +61,10 @@ function Sidebar({
           </div>
         </div>
 
-        <a className="seller-logout" href="#cerrar-sesion">
+        <NavLink className="seller-logout" to="/logout">
           <Icon name="logout" />
-          Cerrar sesión
-        </a>
+          Cerrar sesion
+        </NavLink>
       </div>
     </aside>
   )

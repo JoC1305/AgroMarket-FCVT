@@ -1,6 +1,7 @@
 import Icon from '../components/Icon'
 import Header from '../components/VendedorHeader'
 import Sidebar from '../components/VendedorSidebar'
+import '../styles/seller.css'
 
 const metrics = [
   { label: 'Ventas de hoy', value: '$ 1.240', detail: '+8 ventas registradas', icon: 'sales' },

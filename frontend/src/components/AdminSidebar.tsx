@@ -1,10 +1,12 @@
+import { NavLink } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import Icon, { type IconName } from './Icon'
+import '../styles/admin.css'
 
 type SidebarItem = {
   label: string
   icon: IconName
-  href: string
+  to: string
   page: string
 }
 
@@ -13,16 +15,15 @@ type AdminSidebarProps = {
 }
 
 const sidebarItems: SidebarItem[] = [
-  { label: 'Inicio', icon: 'home', href: '#inicio', page: 'inicio' },
-  { label: 'Ventas', icon: 'sales', href: '#ventas', page: 'ventas' },
-  { label: 'Inventario', icon: 'inventory', href: '#inventario', page: 'inventario' },
-  { label: 'Compras', icon: 'shopping', href: '#compras', page: 'compras' },
-  { label: 'Creditos', icon: 'credits', href: '#creditos', page: 'creditos' },
-  { label: 'Clientes', icon: 'clients', href: '#clientes', page: 'clientes' },
-  { label: 'Proveedores', icon: 'providers', href: '#proveedores', page: 'proveedores' },
-  { label: 'Usuarios', icon: 'users', href: '#usuarios', page: 'usuarios' },
+  { label: 'Inicio', icon: 'home', to: '/admin/principal', page: 'inicio' },
+  { label: 'Ventas', icon: 'sales', to: '/admin/ventas', page: 'ventas' },
+  { label: 'Inventario', icon: 'inventory', to: '/admin/inventario', page: 'inventario' },
+  { label: 'Compras', icon: 'shopping', to: '/admin/compras', page: 'compras' },
+  { label: 'Creditos', icon: 'credits', to: '/admin/creditos', page: 'creditos' },
+  { label: 'Clientes', icon: 'clients', to: '/admin/clientes', page: 'clientes' },
+  { label: 'Proveedores', icon: 'providers', to: '/admin/proveedores', page: 'proveedores' },
+  { label: 'Usuarios', icon: 'users', to: '/admin/usuarios', page: 'usuarios' },
 ]
-
 
 function AdminSidebar({ activePage = 'inicio' }: AdminSidebarProps) {
   return (
@@ -37,17 +38,17 @@ function AdminSidebar({ activePage = 'inicio' }: AdminSidebarProps) {
 
       <nav className="admin-nav">
         {sidebarItems.map((item) => (
-          <a className={item.page === activePage ? 'active' : undefined} href={item.href} key={item.label}>
+          <NavLink className={item.page === activePage ? 'active' : undefined} to={item.to} key={item.label}>
             <Icon name={item.icon} />
             <span>{item.label}</span>
-          </a>
+          </NavLink>
         ))}
       </nav>
 
-      <a className="admin-logout" href="#cerrar-sesion">
+      <NavLink className="admin-logout" to="/logout">
         <Icon name="logout" />
-        <span>Cerrar sesión</span>
-      </a>
+        <span>Cerrar sesion</span>
+      </NavLink>
     </aside>
   )
 }
