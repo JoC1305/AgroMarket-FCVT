@@ -1,5 +1,7 @@
-import AdminHeader from '../components_admin/AdminHeader'
-import AdminSidebar from '../components_admin/AdminSidebar'
+import AdminHeader from '../components/AdminHeader'
+import AdminSidebar from '../components/AdminSidebar'
+import Icon, { type IconName }  from '../components/Icon'
+
 
 type MetricTone = 'green' | 'coral' | 'teal' | 'slate'
 
@@ -8,7 +10,7 @@ const metrics: {
   title: string
   value: string
   detail: string
-  icon: string
+  icon: IconName
   tone: MetricTone
 }[] = [
   {
@@ -16,7 +18,7 @@ const metrics: {
     title: 'Ventas realizadas',
     value: '$3,120.50',
     detail: '24 transacciones',
-    icon: '+',
+    icon: 'plus',
     tone: 'green',
   },
   {
@@ -24,7 +26,7 @@ const metrics: {
     title: 'Utilidades generadas',
     value: '$45,280.00',
     detail: '12.5% vs mes anterior',
-    icon: '$',
+    icon: 'sales',
     tone: 'teal',
   },
   {
@@ -32,7 +34,7 @@ const metrics: {
     title: 'Creditos abiertos',
     value: '$12,450.00',
     detail: '8 facturas vencidas',
-    icon: '!',
+    icon: 'alerts',
     tone: 'coral',
   },
   {
@@ -40,7 +42,7 @@ const metrics: {
     title: 'Compras realizadas',
     value: '$8,900.00',
     detail: 'Reposicion de stock semanal',
-    icon: '#',
+    icon: 'inventory',
     tone: 'slate',
   },
 ]
@@ -75,7 +77,7 @@ function Home() {
             {metrics.map((metric) => (
               <article className={`metric-card metric-card-${metric.tone}`} key={metric.title}>
                 <div className="metric-icon" aria-hidden="true">
-                  {metric.icon}
+                  <Icon name={metric.icon} />
                 </div>
                 <span>{metric.label}</span>
                 <p>{metric.title}</p>

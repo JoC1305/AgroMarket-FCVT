@@ -21,7 +21,6 @@ function Header({
     <header className="seller-topbar">
       <div>
         <p className="eyebrow">{eyebrow}</p>
-        <h1>{title}</h1>
       </div>
 
       <div className="seller-search">
@@ -36,7 +35,7 @@ function Header({
         </button>
         <button className="button primary" type="button" onClick={onNewSale}>
           <Icon name="plus" />
-          Registrar nueva venta
+          Registrar venta
         </button>
         <button className="icon-button" type="button" aria-label="Alertas">
           <Icon name="bell" />

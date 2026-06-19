@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
-import AdminHeader from './components_admin/AdminHeader'
-import AdminSidebar from './components_admin/AdminSidebar'
+import AdminHeader from './components/AdminHeader'
+import AdminSidebar from './components/AdminSidebar'
 import AdminHome from './pages_admin/home'
 import AdminVentas from './pages_admin/Ventas'
+import AdminInventario from './pages_admin/Inventario'
 import SellerHome from './pages_vendedor/home'
 import HistorialDeVentas from './pages_vendedor/HistorialDeVentas'
 import './App.css'
@@ -191,6 +192,10 @@ function App() {
 
   if (activePage === 'ventas') {
     return <AdminVentas />
+  }
+
+  if (activePage === 'inventario') {
+    return <AdminInventario />
   }
 
   return <AdminPlaceholder page={activePage} />
