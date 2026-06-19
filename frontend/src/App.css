@@ -2221,9 +2221,11 @@ meter::-webkit-meter-optimum-value {
 }
 
 .seller-home .seller-topbar {
-  grid-template-columns: 28% 31% 39%;
-  column-gap: 1%;
-  row-gap: 2%;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(280px, 1.4fr) minmax(360px, auto);
+  grid-template-areas: "title search actions";
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 12px;
 }
 
 .seller-home .seller-summary {
@@ -2265,18 +2267,20 @@ meter::-webkit-meter-optimum-value {
 .seller-home .seller-actions {
   width: 100%;
   justify-content: flex-end;
-  gap: 2%;
+  gap: 8px;
+  min-width: 0;
 }
 
 .seller-home .seller-actions .button {
-  flex: 1 1 36%;
+  flex: 0 1 auto;
   min-width: 0;
-  padding-right: 3%;
-  padding-left: 3%;
+  padding-right: 14px;
+  padding-left: 14px;
+  font-size: 14px;
 }
 
 .seller-home .seller-actions .icon-button {
-  flex: 0 0 10%;
+  flex: 0 0 44px;
 }
 
 .seller-home .actions:not(.seller-actions) {
@@ -2322,7 +2326,13 @@ meter::-webkit-meter-optimum-value {
     grid-template-columns: 22% 78%;
   }
 
-  .seller-home .seller-topbar,
+  .seller-home .seller-topbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "title actions"
+      "search search";
+  }
+
   .seller-home .seller-dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -2373,6 +2383,14 @@ meter::-webkit-meter-optimum-value {
     padding-left: 5%;
   }
 
+  .seller-home .seller-topbar {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "search"
+      "actions";
+  }
+
   .seller-home .seller-summary,
   .seller-home .seller-side-column,
   .seller-home .expiry-grid {
@@ -2381,13 +2399,16 @@ meter::-webkit-meter-optimum-value {
 
   .seller-home .seller-actions,
   .seller-home .actions:not(.seller-actions) {
-    gap: 2%;
+    gap: 8px;
   }
 
   .seller-home .seller-actions .button,
-  .seller-home .seller-actions .icon-button,
   .seller-home .actions:not(.seller-actions) .button {
     flex: 1 1 100%;
+  }
+
+  .seller-home .seller-actions .icon-button {
+    flex: 1 1 calc(50% - 4px);
   }
 
   .seller-home .sales-row {

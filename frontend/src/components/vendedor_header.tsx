@@ -21,6 +21,7 @@ function Header({
     <header className="seller-topbar">
       <div>
         <p className="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
       </div>
 
       <div className="seller-search">
