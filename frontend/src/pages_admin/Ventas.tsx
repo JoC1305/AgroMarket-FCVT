@@ -1,6 +1,6 @@
 import { type FormEvent, useMemo, useState } from 'react'
-import AdminHeader from '../components_admin/AdminHeader'
-import AdminSidebar from '../components_admin/AdminSidebar'
+import AdminHeader from '../components/AdminHeader'
+import AdminSidebar from '../components/AdminSidebar'
 
 type Sale = {
   date: string

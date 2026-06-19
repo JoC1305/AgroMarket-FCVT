@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 export type IconName =
-  | 'inicio'
+  | 'home'
   | 'inventory'
   | 'clients'
   | 'sales'
@@ -12,19 +12,20 @@ export type IconName =
   | 'bell'
   | 'settings'
   | 'trend'
-  | 'box'
   | 'calendar'
   | 'eye'
   | 'logout'
+  | 'credits'
+  | 'users'
+  | 'providers'
 
 
 const paths: Record<IconName, ReactNode> = {
-  inicio: (
+  home: (
     <>
-      <rect x="4" y="4" width="6" height="6" rx="1" />
-      <rect x="14" y="4" width="6" height="6" rx="1" />
-      <rect x="4" y="14" width="6" height="6" rx="1" />
-      <rect x="14" y="14" width="6" height="6" rx="1" />
+      <path d="M4 10.5 12 4l8 6.5" />
+      <path d="M6.5 9.5V20h11V9.5" />
+      <path d="M10 20v-6h4v6" />
     </>
   ),
   inventory: (
@@ -44,8 +45,11 @@ const paths: Record<IconName, ReactNode> = {
   ),
   sales: (
     <>
-      <rect x="4" y="5" width="16" height="14" rx="2" />
-      <path d="M8 9h8M8 13h5M16 16h.01" />
+      <path d="M4 19h16" />
+      <path d="M7 16v-4" />
+      <path d="M12 16V8" />
+      <path d="M17 16v-7" />
+      <path d="m7 9 4-4 3 3 4-5" />
     </>
   ),
   alerts: (
@@ -81,8 +85,8 @@ const paths: Record<IconName, ReactNode> = {
   ),
   settings: (
     <>
-      <circle cx="12" cy="12" r="3" />
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06-2.12 2.12-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V20h-3v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06-2.12-2.12.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3v-3h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06 2.12-2.12.06.06A1.65 1.65 0 0 0 8.2 5.4a1.65 1.65 0 0 0 1-1.51V4h3v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06 2.12 2.12-.06.06A1.65 1.65 0 0 0 19.4 9c.22.62.79 1 1.45 1H21v3h-.09a1.65 1.65 0 0 0-1.51 1Z" />
+    <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8.92 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
     </>
   ),
   trend: (
@@ -90,12 +94,6 @@ const paths: Record<IconName, ReactNode> = {
       <path d="M3 17h18" />
       <path d="m6 14 4-4 3 3 5-6" />
       <path d="M18 7h-4M18 7v4" />
-    </>
-  ),
-  box: (
-    <>
-      <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-      <path d="m3.3 7 8.7 5 8.7-5M12 22V12" />
     </>
   ),
   calendar: (
@@ -115,6 +113,31 @@ const paths: Record<IconName, ReactNode> = {
       <path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4" />
       <path d="M15 16l4-4-4-4" />
       <path d="M8 12h11" />
+    </>
+  ),
+    credits: (
+    <>
+      <rect x="4" y="5" width="16" height="14" rx="2" />
+      <path d="M7 9h10" />
+      <path d="M8 14h3" />
+      <path d="M15 14h1" />
+    </>
+    ),
+    providers: (
+    <>
+      <path d="M3 17h18" />
+      <path d="M5 17V8h10v9" />
+      <path d="M15 11h3l3 3v3" />
+      <path d="M7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+      <path d="M17 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+    </>
+  ),
+  users: (
+    <>
+      <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+      <path d="M4 20a5 5 0 0 1 10 0" />
+      <path d="M16 8h5" />
+      <path d="M18.5 5.5v5" />
     </>
   )
 }

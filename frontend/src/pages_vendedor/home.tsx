@@ -4,7 +4,7 @@ import Sidebar from '../components/vendedor_sidebar'
 
 const metrics = [
   { label: 'Ventas de hoy', value: '$ 1.240', detail: '+8 ventas registradas', icon: 'sales' },
-  { label: 'Productos vendidos', value: '86', detail: '12 categorias activas', icon: 'box' },
+  { label: 'Productos vendidos', value: '86', detail: '12 categorias activas', icon: 'inventory' },
   { label: 'Alertas activas', value: '5', detail: '2 requieren revision', icon: 'alerts' },
 ] as const
 
