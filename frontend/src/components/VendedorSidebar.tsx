@@ -10,6 +10,7 @@ type SidebarItem = {
 const sidebarItems: SidebarItem[] = [
   { label: 'Inicio', href: '#inicio', icon: 'home' },
   { label: 'Inventario', href: '#inventario', icon: 'inventory' },
+  { label: 'Escanear', href: '#escanear', icon: 'scan' },
   { label: 'Clientes', href: '#clientes', icon: 'clients' },
   { label: 'Ventas', href: '#vendedor-ventas', icon: 'sales' },
   { label: 'Alertas', href: '#alertas', icon: 'alerts' },

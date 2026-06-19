@@ -1,6 +1,6 @@
-﻿import Header from '../components/vendedor_header'
+﻿import Header from '../components/VendedorHeader'
 import Icon from '../components/Icon'
-import Sidebar from '../components/vendedor_sidebar'
+import Sidebar from '../components/VendedorSidebar'
 
 const salesHistory = [
   {

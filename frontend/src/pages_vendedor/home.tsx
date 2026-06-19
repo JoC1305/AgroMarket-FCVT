@@ -1,6 +1,6 @@
 import Icon from '../components/Icon'
-import Header from '../components/vendedor_header'
-import Sidebar from '../components/vendedor_sidebar'
+import Header from '../components/VendedorHeader'
+import Sidebar from '../components/VendedorSidebar'
 
 const metrics = [
   { label: 'Ventas de hoy', value: '$ 1.240', detail: '+8 ventas registradas', icon: 'sales' },
@@ -44,6 +44,9 @@ function Home() {
           eyebrow="Panel de vendedor"
           title="Resumen de ventas"
           searchLabel="Buscar producto, cliente o venta"
+          onScan={() => {
+            window.location.hash = '#escanear'
+          }}
         />
 
         <section className="seller-summary" aria-label="Indicadores del vendedor">

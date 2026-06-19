@@ -7,6 +7,7 @@ import AdminVentas from './pages_admin/Ventas'
 import AdminInventario from './pages_admin/Inventario'
 import SellerHome from './pages_vendedor/home'
 import HistorialDeVentas from './pages_vendedor/HistorialDeVentas'
+import EscanearProducto from './pages_vendedor/EscanearProducto'
 import './App.css'
 
 type UserRole = 'admin' | 'seller'
@@ -179,6 +180,10 @@ function App() {
   }
 
   if (session.role === 'seller') {
+    if (activePage === 'escanear') {
+      return <EscanearProducto />
+    }
+
     if (activePage === 'ventas' || activePage === 'vendedor-ventas') {
       return <HistorialDeVentas />
     }

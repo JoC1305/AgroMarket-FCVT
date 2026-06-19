@@ -579,6 +579,238 @@ meter::-webkit-meter-optimum-value {
   background: #f3f6f2;
 }
 
+.scanner-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  align-items: start;
+  gap: 18px;
+}
+
+.scanner-panel,
+.mock-sale-panel {
+  min-width: 0;
+}
+
+.scanner-frame {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+  border: 1px solid #dfe6e1;
+  border-radius: 8px;
+  background: #102d27;
+}
+
+.scanner-frame video,
+.scanner-frame canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scanner-frame canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.scanner-frame::after {
+  position: absolute;
+  inset: 18%;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 8px;
+  box-shadow: 0 0 0 999px rgba(15, 45, 39, 0.28);
+  content: "";
+  pointer-events: none;
+}
+
+.scanner-frame.is-active::before {
+  position: absolute;
+  right: 18%;
+  left: 18%;
+  top: 50%;
+  z-index: 1;
+  height: 2px;
+  background: #f0b84f;
+  content: "";
+  pointer-events: none;
+}
+
+.scanner-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  padding: 24px;
+  color: #f5fbf7;
+  text-align: center;
+}
+
+.scanner-placeholder .home-icon {
+  width: 34px;
+  height: 34px;
+  justify-self: center;
+}
+
+.scanner-placeholder span,
+.scanner-message,
+.empty-state {
+  color: #65746d;
+}
+
+.scanner-message {
+  margin: 14px 0 0;
+}
+
+.mock-code-list,
+.product-result-list,
+.mock-sale-lines {
+  display: grid;
+  gap: 10px;
+}
+
+.mock-code-list {
+  margin-top: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mock-code-button,
+.product-result-card {
+  border: 1px solid #dfe6e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2933;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.mock-code-button {
+  display: grid;
+  gap: 6px;
+  min-height: 78px;
+  padding: 12px;
+}
+
+.mock-code-button span,
+.product-result-card span,
+.mock-sale-line span,
+.selected-product-meta span {
+  color: #65746d;
+  font-size: 12px;
+}
+
+.lookup-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: #3e4b45;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.lookup-field input,
+.mock-sale-line input {
+  min-height: 42px;
+  border: 1px solid #dfe6e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e2a24;
+  font: inherit;
+  padding: 0 12px;
+}
+
+.product-result-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+}
+
+.product-result-card div {
+  display: grid;
+  gap: 4px;
+}
+
+.product-result-card small {
+  color: #1f7a5a;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.product-result-card.is-selected,
+.mock-code-button:hover,
+.product-result-card:hover {
+  border-color: #1f7a5a;
+  background: #edf5ef;
+}
+
+.selected-product-panel,
+.mock-sale-panel {
+  grid-column: 2;
+}
+
+.selected-product-card {
+  display: grid;
+  gap: 12px;
+}
+
+.selected-product-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf1ee;
+}
+
+.full-width-button {
+  width: 100%;
+}
+
+.mock-sale-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 76px auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e5ece7;
+  border-radius: 8px;
+}
+
+.mock-sale-line div {
+  display: grid;
+  gap: 4px;
+}
+
+.mock-sale-line input {
+  min-height: 36px;
+  text-align: center;
+}
+
+.mock-sale-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #edf1ee;
+}
+
+.mock-sale-total span {
+  color: #65746d;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mock-sale-total strong {
+  color: #1f2933;
+  font-size: 24px;
+}
+
 @media (max-width: 1180px) {
   .seller-home {
     grid-template-columns: 22% 78%;
@@ -598,6 +830,15 @@ meter::-webkit-meter-optimum-value {
 
   .seller-side-column {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scanner-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .selected-product-panel,
+  .mock-sale-panel {
+    grid-column: auto;
   }
 }
 
@@ -654,6 +895,18 @@ meter::-webkit-meter-optimum-value {
   .seller-summary,
   .seller-side-column,
   .expiry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mock-code-list {
+    grid-template-columns: 1fr;
+  }
+
+  .scanner-frame {
+    min-height: 260px;
+  }
+
+  .mock-sale-line {
     grid-template-columns: 1fr;
   }
 
