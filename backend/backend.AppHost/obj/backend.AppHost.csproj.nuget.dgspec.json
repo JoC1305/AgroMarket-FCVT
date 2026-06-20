@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {}
+    "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {
+    "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
+        "projectUniqueName": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
         "projectName": "backend.AppHost",
-        "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
+        "projectPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
         "packagesPath": "C:\\Users\\ASUS I7\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\obj\\",
+        "outputPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
+          "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
           "C:\\Users\\ASUS I7\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
@@ -30,9 +30,6 @@
           }
         },
         "warningProperties": {
-          "noWarn": [
-            "NU1605"
-          ],
           "warnAsError": [
             "NU1605"
           ]
@@ -62,6 +59,10 @@
               "target": "Package",
               "version": "[13.4.5, )",
               "autoReferenced": true
+            },
+            "Aspire.Hosting.PostgreSQL": {
+              "target": "Package",
+              "version": "[13.4.6, )"
             }
           },
           "imports": [

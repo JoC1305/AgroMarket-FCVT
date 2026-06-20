@@ -24,7 +24,7 @@
           "build/Microsoft.AspNetCore.OpenApi.targets": {}
         }
       },
-      "Microsoft.Extensions.AmbientMetadata.Application/10.5.0": {
+      "Microsoft.Extensions.AmbientMetadata.Application/10.7.0": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.Extensions.AmbientMetadata.Application.dll": {
@@ -40,7 +40,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Compliance.Abstractions/10.5.0": {
+      "Microsoft.Extensions.Compliance.Abstractions/10.7.0": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Compliance.Abstractions.dll": {
@@ -53,7 +53,7 @@
           }
         }
       },
-      "Microsoft.Extensions.DependencyInjection.AutoActivation/10.5.0": {
+      "Microsoft.Extensions.DependencyInjection.AutoActivation/10.7.0": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.Extensions.DependencyInjection.AutoActivation.dll": {
@@ -69,7 +69,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Diagnostics.ExceptionSummarization/10.5.0": {
+      "Microsoft.Extensions.Diagnostics.ExceptionSummarization/10.7.0": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Diagnostics.ExceptionSummarization.dll": {
@@ -85,10 +85,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Http.Diagnostics/10.5.0": {
+      "Microsoft.Extensions.Http.Diagnostics/10.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Telemetry": "10.5.0"
+          "Microsoft.Extensions.Telemetry": "10.7.0"
         },
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Http.Diagnostics.dll": {
@@ -104,11 +104,11 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Http.Resilience/10.5.0": {
+      "Microsoft.Extensions.Http.Resilience/10.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Http.Diagnostics": "10.5.0",
-          "Microsoft.Extensions.Resilience": "10.5.0"
+          "Microsoft.Extensions.Http.Diagnostics": "10.7.0",
+          "Microsoft.Extensions.Resilience": "10.7.0"
         },
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Http.Resilience.dll": {
@@ -124,11 +124,11 @@
           "buildTransitive/net8.0/Microsoft.Extensions.Http.Resilience.targets": {}
         }
       },
-      "Microsoft.Extensions.Resilience/10.5.0": {
+      "Microsoft.Extensions.Resilience/10.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Diagnostics.ExceptionSummarization": "10.5.0",
-          "Microsoft.Extensions.Telemetry.Abstractions": "10.5.0",
+          "Microsoft.Extensions.Diagnostics.ExceptionSummarization": "10.7.0",
+          "Microsoft.Extensions.Telemetry.Abstractions": "10.7.0",
           "Polly.Extensions": "8.4.2",
           "Polly.RateLimiting": "8.4.2"
         },
@@ -146,10 +146,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.ServiceDiscovery/10.5.0": {
+      "Microsoft.Extensions.ServiceDiscovery/10.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.ServiceDiscovery.Abstractions": "10.5.0"
+          "Microsoft.Extensions.ServiceDiscovery.Abstractions": "10.7.0"
         },
         "compile": {
           "lib/net10.0/Microsoft.Extensions.ServiceDiscovery.dll": {
@@ -162,7 +162,7 @@
           }
         }
       },
-      "Microsoft.Extensions.ServiceDiscovery.Abstractions/10.5.0": {
+      "Microsoft.Extensions.ServiceDiscovery.Abstractions/10.7.0": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.Extensions.ServiceDiscovery.Abstractions.dll": {
@@ -175,12 +175,12 @@
           }
         }
       },
-      "Microsoft.Extensions.Telemetry/10.5.0": {
+      "Microsoft.Extensions.Telemetry/10.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.AmbientMetadata.Application": "10.5.0",
-          "Microsoft.Extensions.DependencyInjection.AutoActivation": "10.5.0",
-          "Microsoft.Extensions.Telemetry.Abstractions": "10.5.0"
+          "Microsoft.Extensions.AmbientMetadata.Application": "10.7.0",
+          "Microsoft.Extensions.DependencyInjection.AutoActivation": "10.7.0",
+          "Microsoft.Extensions.Telemetry.Abstractions": "10.7.0"
         },
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Telemetry.dll": {
@@ -196,10 +196,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Telemetry.Abstractions/10.5.0": {
+      "Microsoft.Extensions.Telemetry.Abstractions/10.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Compliance.Abstractions": "10.5.0"
+          "Microsoft.Extensions.Compliance.Abstractions": "10.7.0"
         },
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Telemetry.Abstractions.dll": {
@@ -229,10 +229,10 @@
           }
         }
       },
-      "OpenTelemetry/1.15.3": {
+      "OpenTelemetry/1.16.0": {
         "type": "package",
         "dependencies": {
-          "OpenTelemetry.Api.ProviderBuilderExtensions": "1.15.3"
+          "OpenTelemetry.Api.ProviderBuilderExtensions": "1.16.0"
         },
         "compile": {
           "lib/net10.0/OpenTelemetry.dll": {
@@ -245,7 +245,7 @@
           }
         }
       },
-      "OpenTelemetry.Api/1.15.3": {
+      "OpenTelemetry.Api/1.16.0": {
         "type": "package",
         "compile": {
           "lib/net10.0/OpenTelemetry.Api.dll": {
@@ -258,10 +258,10 @@
           }
         }
       },
-      "OpenTelemetry.Api.ProviderBuilderExtensions/1.15.3": {
+      "OpenTelemetry.Api.ProviderBuilderExtensions/1.16.0": {
         "type": "package",
         "dependencies": {
-          "OpenTelemetry.Api": "1.15.3"
+          "OpenTelemetry.Api": "1.16.0"
         },
         "compile": {
           "lib/net10.0/OpenTelemetry.Api.ProviderBuilderExtensions.dll": {
@@ -274,10 +274,10 @@
           }
         }
       },
-      "OpenTelemetry.Exporter.OpenTelemetryProtocol/1.15.3": {
+      "OpenTelemetry.Exporter.OpenTelemetryProtocol/1.16.0": {
         "type": "package",
         "dependencies": {
-          "OpenTelemetry": "1.15.3"
+          "OpenTelemetry": "1.16.0"
         },
         "compile": {
           "lib/net10.0/OpenTelemetry.Exporter.OpenTelemetryProtocol.dll": {
@@ -290,10 +290,10 @@
           }
         }
       },
-      "OpenTelemetry.Extensions.Hosting/1.15.3": {
+      "OpenTelemetry.Extensions.Hosting/1.16.0": {
         "type": "package",
         "dependencies": {
-          "OpenTelemetry": "1.15.3"
+          "OpenTelemetry": "1.16.0"
         },
         "compile": {
           "lib/net10.0/OpenTelemetry.Extensions.Hosting.dll": {
@@ -419,10 +419,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
-          "Microsoft.Extensions.Http.Resilience": "10.5.0",
-          "Microsoft.Extensions.ServiceDiscovery": "10.5.0",
-          "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.15.3",
-          "OpenTelemetry.Extensions.Hosting": "1.15.3",
+          "Microsoft.Extensions.Http.Resilience": "10.7.0",
+          "Microsoft.Extensions.ServiceDiscovery": "10.7.0",
+          "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.16.0",
+          "OpenTelemetry.Extensions.Hosting": "1.16.0",
           "OpenTelemetry.Instrumentation.AspNetCore": "1.15.2",
           "OpenTelemetry.Instrumentation.Http": "1.15.1",
           "OpenTelemetry.Instrumentation.Runtime": "1.15.1"
@@ -468,10 +468,10 @@
         "microsoft.aspnetcore.openapi.nuspec"
       ]
     },
-    "Microsoft.Extensions.AmbientMetadata.Application/10.5.0": {
-      "sha512": "lCJjEDknSYeTXB133DwLNwXYA6q9nzJiJFjQb1KO1n3sS6wHfROm6zqG6y3UthQP5oPnNbE1a7M15LpjSf5yBg==",
+    "Microsoft.Extensions.AmbientMetadata.Application/10.7.0": {
+      "sha512": "yZ0818pVYQvUFW/1m+f8A1+lIAeSeQxEOdUCMIC+tqcRRKlqNjKPRKvGHPp8xLRbZBLaHfBtDslJa/sofn7J/Q==",
       "type": "package",
-      "path": "microsoft.extensions.ambientmetadata.application/10.5.0",
+      "path": "microsoft.extensions.ambientmetadata.application/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -489,14 +489,14 @@
         "lib/net9.0/Microsoft.Extensions.AmbientMetadata.Application.xml",
         "lib/netstandard2.0/Microsoft.Extensions.AmbientMetadata.Application.dll",
         "lib/netstandard2.0/Microsoft.Extensions.AmbientMetadata.Application.xml",
-        "microsoft.extensions.ambientmetadata.application.10.5.0.nupkg.sha512",
+        "microsoft.extensions.ambientmetadata.application.10.7.0.nupkg.sha512",
         "microsoft.extensions.ambientmetadata.application.nuspec"
       ]
     },
-    "Microsoft.Extensions.Compliance.Abstractions/10.5.0": {
-      "sha512": "xbWZji13Vb2jDJNtwVrKpI09jd8x3n3fL+GzhiLK+8O5Wc2A+GyqCZalST2fV46Pf0QfCwkXf83y+3/rDkCd7A==",
+    "Microsoft.Extensions.Compliance.Abstractions/10.7.0": {
+      "sha512": "qbi6lg6dyvydBvpjXeBx3wLPvmgXWn3nwkKBOsgEck6w++BEsBcv8YhdcczME16Oq+a6wkdtna9/qCEkxsNw5A==",
       "type": "package",
-      "path": "microsoft.extensions.compliance.abstractions/10.5.0",
+      "path": "microsoft.extensions.compliance.abstractions/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -510,14 +510,14 @@
         "lib/net9.0/Microsoft.Extensions.Compliance.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Compliance.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Compliance.Abstractions.xml",
-        "microsoft.extensions.compliance.abstractions.10.5.0.nupkg.sha512",
+        "microsoft.extensions.compliance.abstractions.10.7.0.nupkg.sha512",
         "microsoft.extensions.compliance.abstractions.nuspec"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.AutoActivation/10.5.0": {
-      "sha512": "vby/PzPScy9pX3r3f5UuHutxSr4Q8SXqyIiH6+JEK7SVpTCL6f8R9mp04OUVsZLlsME2rBjA9PHXf9L9aG7wbg==",
+    "Microsoft.Extensions.DependencyInjection.AutoActivation/10.7.0": {
+      "sha512": "WrSK0FGHSjSY4Pg4kd9Du8CUDwrgFTwHH1Y+N7sjyT6RFMU+G3coQ/Uq9PMGdQcy+DVKSMGHjfmWY47ZoYvhNA==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.autoactivation/10.5.0",
+      "path": "microsoft.extensions.dependencyinjection.autoactivation/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -535,14 +535,14 @@
         "lib/net9.0/Microsoft.Extensions.DependencyInjection.AutoActivation.xml",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.AutoActivation.dll",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.AutoActivation.xml",
-        "microsoft.extensions.dependencyinjection.autoactivation.10.5.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.autoactivation.10.7.0.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.autoactivation.nuspec"
       ]
     },
-    "Microsoft.Extensions.Diagnostics.ExceptionSummarization/10.5.0": {
-      "sha512": "+jdC9YUfMkX9/Yb3Pi8Kovt1nFVGGB2UqSHZgLapo63d+WAhYf9KiuNA3jiaaRINhVyCgWuKFoMtjWKET5oXEQ==",
+    "Microsoft.Extensions.Diagnostics.ExceptionSummarization/10.7.0": {
+      "sha512": "Kc4XbbxtCzvn2P/fKF48xLWPbp3N5DV0MkJlgPJHEb47PUqCJ6kEl/JTKfpmP7QLuwYjx2QxKTdtwXfpjgA6KQ==",
       "type": "package",
-      "path": "microsoft.extensions.diagnostics.exceptionsummarization/10.5.0",
+      "path": "microsoft.extensions.diagnostics.exceptionsummarization/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -560,14 +560,14 @@
         "lib/net9.0/Microsoft.Extensions.Diagnostics.ExceptionSummarization.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.ExceptionSummarization.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.ExceptionSummarization.xml",
-        "microsoft.extensions.diagnostics.exceptionsummarization.10.5.0.nupkg.sha512",
+        "microsoft.extensions.diagnostics.exceptionsummarization.10.7.0.nupkg.sha512",
         "microsoft.extensions.diagnostics.exceptionsummarization.nuspec"
       ]
     },
-    "Microsoft.Extensions.Http.Diagnostics/10.5.0": {
-      "sha512": "HoWdJKvBt7vkLlclRbjDTXcCp3s9hwFf1CY4ovlmMKFAbKSI7zKl0fUQ4LMvUI3sHIhpEtMjp7Mxjaf/yEmVvQ==",
+    "Microsoft.Extensions.Http.Diagnostics/10.7.0": {
+      "sha512": "1m1zdBGW5J8MOxdZpJ5mUqdSaamRrYkpmfnEfeDmlZnglpfgDztcKOBU6cVsmn90AB7Ji2w8USvEsJ8PahbBWQ==",
       "type": "package",
-      "path": "microsoft.extensions.http.diagnostics/10.5.0",
+      "path": "microsoft.extensions.http.diagnostics/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -585,14 +585,14 @@
         "lib/net9.0/Microsoft.Extensions.Http.Diagnostics.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Http.Diagnostics.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Http.Diagnostics.xml",
-        "microsoft.extensions.http.diagnostics.10.5.0.nupkg.sha512",
+        "microsoft.extensions.http.diagnostics.10.7.0.nupkg.sha512",
         "microsoft.extensions.http.diagnostics.nuspec"
       ]
     },
-    "Microsoft.Extensions.Http.Resilience/10.5.0": {
-      "sha512": "81rw+wjFFP5jREOERb1PHIPvBNFtE6NXO8bsLTSCET2UZWxj7cwrpzcI3l07tOpHEprYmruZAF3kZEar7uG4Iw==",
+    "Microsoft.Extensions.Http.Resilience/10.7.0": {
+      "sha512": "3Lip0MkBVPtqU1wCM2M2Y8CzsqxA1BanVNMV9LQYMTwBgy25NDe6U9nSk6SfmsxXlh77iwSQuPsyjt5mxrOGmQ==",
       "type": "package",
-      "path": "microsoft.extensions.http.resilience/10.5.0",
+      "path": "microsoft.extensions.http.resilience/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -611,14 +611,14 @@
         "lib/net9.0/Microsoft.Extensions.Http.Resilience.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Http.Resilience.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Http.Resilience.xml",
-        "microsoft.extensions.http.resilience.10.5.0.nupkg.sha512",
+        "microsoft.extensions.http.resilience.10.7.0.nupkg.sha512",
         "microsoft.extensions.http.resilience.nuspec"
       ]
     },
-    "Microsoft.Extensions.Resilience/10.5.0": {
-      "sha512": "yjbGQkSqLkP8/lKZLfaUcdkNUpWUqMafCsm56kw9uzznhJb/uJiIRy5/zG9D0SFsBzJkz2AcvWU2J/MJydPxoA==",
+    "Microsoft.Extensions.Resilience/10.7.0": {
+      "sha512": "ldUrtRzWSnfe5945xoSxDXxoWXnIKn19E74Huieyp76XW/BjRk3bhkILSSib1NKdZ2lpi/ReTvOpNGcJ8hkOxw==",
       "type": "package",
-      "path": "microsoft.extensions.resilience/10.5.0",
+      "path": "microsoft.extensions.resilience/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -636,14 +636,14 @@
         "lib/net9.0/Microsoft.Extensions.Resilience.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Resilience.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Resilience.xml",
-        "microsoft.extensions.resilience.10.5.0.nupkg.sha512",
+        "microsoft.extensions.resilience.10.7.0.nupkg.sha512",
         "microsoft.extensions.resilience.nuspec"
       ]
     },
-    "Microsoft.Extensions.ServiceDiscovery/10.5.0": {
-      "sha512": "M7w+KSTX72nEHuizITgUAD7SZwDdiLTw+tpUvR5iKifuhYJPctghzjDJevkz2OQ6vNGvUuJEfReUpS9DU8kBpA==",
+    "Microsoft.Extensions.ServiceDiscovery/10.7.0": {
+      "sha512": "UgBfP98NmKDjx/2jbLGkckSlc8XG4ubkjPrqACE2i9LPmrgoYGWTh9snybRUGBm0sTchsq3on81XRxfvX+XC5g==",
       "type": "package",
-      "path": "microsoft.extensions.servicediscovery/10.5.0",
+      "path": "microsoft.extensions.servicediscovery/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -659,14 +659,14 @@
         "lib/net9.0/Microsoft.Extensions.ServiceDiscovery.xml",
         "lib/netstandard2.0/Microsoft.Extensions.ServiceDiscovery.dll",
         "lib/netstandard2.0/Microsoft.Extensions.ServiceDiscovery.xml",
-        "microsoft.extensions.servicediscovery.10.5.0.nupkg.sha512",
+        "microsoft.extensions.servicediscovery.10.7.0.nupkg.sha512",
         "microsoft.extensions.servicediscovery.nuspec"
       ]
     },
-    "Microsoft.Extensions.ServiceDiscovery.Abstractions/10.5.0": {
-      "sha512": "XWr8wCt2wC+HtonJoqZJB4Iwg2alfbDkgqgoBZv2dHcjNirYujEzSPwDexMYVYIMegaOECmMXdwPuyWlcwrODw==",
+    "Microsoft.Extensions.ServiceDiscovery.Abstractions/10.7.0": {
+      "sha512": "1a/tCYg7+5HdJRQ0BQDDGzANBaw/1fony7eNsMwQ5n9FZmO3K5JCls02o8fwQc296l0szNBwroLRtXf94OZw9A==",
       "type": "package",
-      "path": "microsoft.extensions.servicediscovery.abstractions/10.5.0",
+      "path": "microsoft.extensions.servicediscovery.abstractions/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -682,14 +682,14 @@
         "lib/net9.0/Microsoft.Extensions.ServiceDiscovery.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.ServiceDiscovery.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.ServiceDiscovery.Abstractions.xml",
-        "microsoft.extensions.servicediscovery.abstractions.10.5.0.nupkg.sha512",
+        "microsoft.extensions.servicediscovery.abstractions.10.7.0.nupkg.sha512",
         "microsoft.extensions.servicediscovery.abstractions.nuspec"
       ]
     },
-    "Microsoft.Extensions.Telemetry/10.5.0": {
-      "sha512": "jI7b9rkfoz06ZEQols6WG3D0iQMIbtRDHkx1F7QvQOSDmzyXLwUIBbJEO8ftr7aD/2tvsHplqycp+WXFvMfujg==",
+    "Microsoft.Extensions.Telemetry/10.7.0": {
+      "sha512": "vZFNVvkz+7IABEv4klzPX/ZdmZQ6TrcReKUfeYIrQ2bbnvEcgZtG1RmOGeWkc1hFg8cq9sAgUc2lHCqlXSqf5A==",
       "type": "package",
-      "path": "microsoft.extensions.telemetry/10.5.0",
+      "path": "microsoft.extensions.telemetry/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -707,14 +707,14 @@
         "lib/net9.0/Microsoft.Extensions.Telemetry.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Telemetry.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Telemetry.xml",
-        "microsoft.extensions.telemetry.10.5.0.nupkg.sha512",
+        "microsoft.extensions.telemetry.10.7.0.nupkg.sha512",
         "microsoft.extensions.telemetry.nuspec"
       ]
     },
-    "Microsoft.Extensions.Telemetry.Abstractions/10.5.0": {
-      "sha512": "VmU7e6xHqoubWKl7y9MtWyQAjlDpvbds3gY8ZKMS/1GxY2+U1/aMNnMj09aOXAa3p5qhHSSkBzDJvyokCjVkPg==",
+    "Microsoft.Extensions.Telemetry.Abstractions/10.7.0": {
+      "sha512": "ir1QKShZzfEmqO9LUWESVMUDZdnxYBSKQyulYPMeaye531lAuT8YTotthx+htrrS8hZY52HANeqowLQyCYBCZg==",
       "type": "package",
-      "path": "microsoft.extensions.telemetry.abstractions/10.5.0",
+      "path": "microsoft.extensions.telemetry.abstractions/10.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -737,7 +737,7 @@
         "lib/net9.0/Microsoft.Extensions.Telemetry.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Telemetry.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Telemetry.Abstractions.xml",
-        "microsoft.extensions.telemetry.abstractions.10.5.0.nupkg.sha512",
+        "microsoft.extensions.telemetry.abstractions.10.7.0.nupkg.sha512",
         "microsoft.extensions.telemetry.abstractions.nuspec"
       ]
     },
@@ -759,10 +759,10 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "OpenTelemetry/1.15.3": {
-      "sha512": "N0i6WjPoHPbZyms1ugbDIFAJFuGlpeExJMU/+XSL0lQRUkg/D0utFkDoLXf8Z1km5B+xVZ2GyMXXiX8qdeNmPg==",
+    "OpenTelemetry/1.16.0": {
+      "sha512": "nE/Px3MUvQC8c0UG0DOP5OJE7vMtiMaPYi/6TkSS/o/O0s/oPq+8WaPYTVEPzb7lwu/QyLgknc+sFm2FjPXe2A==",
       "type": "package",
-      "path": "opentelemetry/1.15.3",
+      "path": "opentelemetry/1.16.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -788,14 +788,14 @@
         "lib/netstandard2.1/OpenTelemetry.dll.sigstore.json",
         "lib/netstandard2.1/OpenTelemetry.xml",
         "opentelemetry-icon-color.png",
-        "opentelemetry.1.15.3.nupkg.sha512",
+        "opentelemetry.1.16.0.nupkg.sha512",
         "opentelemetry.nuspec"
       ]
     },
-    "OpenTelemetry.Api/1.15.3": {
-      "sha512": "fX+fkCysfPut+qCcT3bKqyX4QN9Saf4CgX8HLOHywEVD+Xr7sULtfuypITpoDysjx8R59dn/3mWhgimMH8cm/g==",
+    "OpenTelemetry.Api/1.16.0": {
+      "sha512": "WZP8Eb6vZTeNqeV+fjBitc7iefBoTHIhaWorqg/h/YiQBlcQJu0bICuTqKV0XRyjiE0eWs80yLlnUtHAFSkFWA==",
       "type": "package",
-      "path": "opentelemetry.api/1.15.3",
+      "path": "opentelemetry.api/1.16.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -818,14 +818,14 @@
         "lib/netstandard2.0/OpenTelemetry.Api.dll.sigstore.json",
         "lib/netstandard2.0/OpenTelemetry.Api.xml",
         "opentelemetry-icon-color.png",
-        "opentelemetry.api.1.15.3.nupkg.sha512",
+        "opentelemetry.api.1.16.0.nupkg.sha512",
         "opentelemetry.api.nuspec"
       ]
     },
-    "OpenTelemetry.Api.ProviderBuilderExtensions/1.15.3": {
-      "sha512": "SYn0lqYDwLMWhv/zlNGsQcl2yX++yTumanX46bmOZE/ZDOd1WjPBO2kZaZgKLEZTZk48pavIFGJ6vOvxXgWVFQ==",
+    "OpenTelemetry.Api.ProviderBuilderExtensions/1.16.0": {
+      "sha512": "hZwaHAkXvUNn9+cS+vEvYBgIrIQOQRz2cIRUODZ5gxHsDsLeNCueLgZFkybopjE0jUhLut6lm5eL3LTqbW0hMg==",
       "type": "package",
-      "path": "opentelemetry.api.providerbuilderextensions/1.15.3",
+      "path": "opentelemetry.api.providerbuilderextensions/1.16.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -848,14 +848,14 @@
         "lib/netstandard2.0/OpenTelemetry.Api.ProviderBuilderExtensions.dll.sigstore.json",
         "lib/netstandard2.0/OpenTelemetry.Api.ProviderBuilderExtensions.xml",
         "opentelemetry-icon-color.png",
-        "opentelemetry.api.providerbuilderextensions.1.15.3.nupkg.sha512",
+        "opentelemetry.api.providerbuilderextensions.1.16.0.nupkg.sha512",
         "opentelemetry.api.providerbuilderextensions.nuspec"
       ]
     },
-    "OpenTelemetry.Exporter.OpenTelemetryProtocol/1.15.3": {
-      "sha512": "FEXJepcseTGbATiCkUfP7ipoFEYYfl/0UmmUwi0KxCPg9PaUA8ab2P1LGopK+/HExasJ1ZutFhZrN6WvUIR23g==",
+    "OpenTelemetry.Exporter.OpenTelemetryProtocol/1.16.0": {
+      "sha512": "gzYLY8sVDY5FYtVlCYSzBYX53xslRlvBLxwFYOdNIhc76SgKdFYUoDQXOeQI3WPBCrZp51QNcP6fZHh1+HtpIQ==",
       "type": "package",
-      "path": "opentelemetry.exporter.opentelemetryprotocol/1.15.3",
+      "path": "opentelemetry.exporter.opentelemetryprotocol/1.16.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -881,14 +881,14 @@
         "lib/netstandard2.1/OpenTelemetry.Exporter.OpenTelemetryProtocol.dll.sigstore.json",
         "lib/netstandard2.1/OpenTelemetry.Exporter.OpenTelemetryProtocol.xml",
         "opentelemetry-icon-color.png",
-        "opentelemetry.exporter.opentelemetryprotocol.1.15.3.nupkg.sha512",
+        "opentelemetry.exporter.opentelemetryprotocol.1.16.0.nupkg.sha512",
         "opentelemetry.exporter.opentelemetryprotocol.nuspec"
       ]
     },
-    "OpenTelemetry.Extensions.Hosting/1.15.3": {
-      "sha512": "u8n/W8yIlqv0BXZmvId1iVaeWXG42tGKdTkuLYg5g57Y/r9CeUNzqtrSHNdG5IoO8iPX79w3v+WsbAHgUQbfeg==",
+    "OpenTelemetry.Extensions.Hosting/1.16.0": {
+      "sha512": "/YfrO5MRaA156vhNanYGPX2JjOwKUrA0+Jf7ltT2eD3VkfHqXcEJY5Oxt/nWH8lqBOTc1nJpn2soBtD5Cml8Dg==",
       "type": "package",
-      "path": "opentelemetry.extensions.hosting/1.15.3",
+      "path": "opentelemetry.extensions.hosting/1.16.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -911,7 +911,7 @@
         "lib/netstandard2.0/OpenTelemetry.Extensions.Hosting.dll.sigstore.json",
         "lib/netstandard2.0/OpenTelemetry.Extensions.Hosting.xml",
         "opentelemetry-icon-color.png",
-        "opentelemetry.extensions.hosting.1.15.3.nupkg.sha512",
+        "opentelemetry.extensions.hosting.1.16.0.nupkg.sha512",
         "opentelemetry.extensions.hosting.nuspec"
       ]
     },
@@ -1092,14 +1092,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj",
+      "projectUniqueName": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj",
       "projectName": "Api",
-      "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj",
+      "projectPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj",
       "packagesPath": "C:\\Users\\ASUS I7\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\obj\\",
+      "outputPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
+        "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
         "C:\\Users\\ASUS I7\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
@@ -1112,8 +1112,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Aplicacion\\Aplicacion.csproj": {
-              "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Aplicacion\\Aplicacion.csproj"
+            "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Aplicacion\\Aplicacion.csproj": {
+              "projectPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Aplicacion\\Aplicacion.csproj"
             },
             "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.ServiceDefaults\\backend.ServiceDefaults.csproj": {
               "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.ServiceDefaults\\backend.ServiceDefaults.csproj"

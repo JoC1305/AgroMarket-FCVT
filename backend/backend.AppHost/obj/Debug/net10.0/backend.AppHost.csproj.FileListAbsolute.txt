@@ -132,3 +132,14 @@ C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\obj\Debug\net10
 C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\obj\Debug\net10.0\backend.AppHost.pdb
 C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\obj\Debug\net10.0\backend.AppHost.genruntimeconfig.cache
 C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\obj\Debug\net10.0\ref\backend.AppHost.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\Nerdbank.MessagePack.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\OpenTelemetry.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\OpenTelemetry.Api.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\OpenTelemetry.Api.ProviderBuilderExtensions.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\OpenTelemetry.Exporter.OpenTelemetryProtocol.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\OpenTelemetry.Extensions.Hosting.dll
+C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\PolyType.dll
+c:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\Aspire.Hosting.PostgreSQL.dll
+c:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\HealthChecks.NpgSql.dll
+c:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost\bin\Debug\net10.0\Npgsql.dll

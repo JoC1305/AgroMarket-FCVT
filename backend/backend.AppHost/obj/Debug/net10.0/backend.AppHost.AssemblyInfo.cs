@@ -11,19 +11,19 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("9113b0b6-74be-45d6-9524-aa880f59a6b0")]
-[assembly: System.Reflection.AssemblyMetadata("dcpclipath", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.3.5\\tool" +
+[assembly: System.Reflection.AssemblyMetadata("dcpclipath", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.4.5\\tool" +
     "s\\dcp.exe"))]
-[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.3.5\\tool" +
+[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.4.5\\tool" +
     "s\\ext\\"))]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectname", "backend.AppHost.csproj")]
-[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.3.5\\tools\\Aspire" +
+[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.4.5\\tools\\Aspire" +
     ".Dashboard.exe"))]
 [assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\obj\\")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("backend.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e14421d12de137de00f937eb62bc6fc7a093da6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6448c1c8c18a6fa2958dc1ff86faeeff8408e25e")]
 [assembly: System.Reflection.AssemblyProductAttribute("backend.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
