@@ -2,6 +2,7 @@
   {
     "id": "CMP-001",
     "purchaseDate": "2026-06-18",
+    "deliveryDate": "2026-06-20",
     "product": "Arroz Premium 1kg",
     "sku": "ARR-BB21",
     "quantity": 500,
@@ -13,6 +14,7 @@
   {
     "id": "CMP-002",
     "purchaseDate": "2026-06-18",
+    "deliveryDate": "2026-06-23",
     "product": "Leche Entera 1L",
     "sku": "LEC-092",
     "quantity": 200,
@@ -24,6 +26,7 @@
   {
     "id": "CMP-003",
     "purchaseDate": "2026-06-15",
+    "deliveryDate": "2026-06-17",
     "product": "Huevos Docena",
     "sku": "HUE-445",
     "quantity": 150,
@@ -35,6 +38,7 @@
   {
     "id": "CMP-004",
     "purchaseDate": "2026-06-12",
+    "deliveryDate": "2026-06-14",
     "product": "Aceite Vegetal 1L",
     "sku": "ACE-002",
     "quantity": 100,
@@ -46,6 +50,7 @@
   {
     "id": "CMP-005",
     "purchaseDate": "2026-06-09",
+    "deliveryDate": "2026-06-13",
     "product": "Azucar Blanca 1kg",
     "sku": "AZU-104",
     "quantity": 300,
@@ -57,6 +62,7 @@
   {
     "id": "CMP-006",
     "purchaseDate": "2026-05-28",
+    "deliveryDate": "2026-06-01",
     "product": "Cafe Molido 400g",
     "sku": "CAF-330",
     "quantity": 90,

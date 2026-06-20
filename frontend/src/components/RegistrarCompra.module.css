@@ -1,0 +1,102 @@
+.purchaseFormPanel {
+  margin-bottom: 22px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #dfe4eb;
+  border-left: 4px solid #0b5a3d;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.05);
+}
+
+.purchaseFormHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.formEyebrow {
+  margin: 0 0 6px;
+  color: #607168;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.formSubtitle {
+  margin: 8px 0 0;
+  color: #52645a;
+  font-size: 13px;
+}
+
+.purchaseForm {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.purchaseForm label {
+  display: grid;
+  gap: 6px;
+  color: #3e4b45;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.purchaseForm input,
+.purchaseForm select {
+  min-height: 40px;
+  width: 100%;
+  border: 1px solid #d7dde5;
+  border-radius: 4px;
+  background: #f9fbfc;
+  color: #16231e;
+  font: inherit;
+  font-size: 13px;
+  padding: 0 10px;
+}
+
+.formActions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background: #003d28;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  background: #ffffff;
+  color: #003d28;
+  border-color: #cbd5dd;
+}
+
+.secondaryButton:hover,
+.primaryButton:hover {
+  opacity: 0.95;
+}
+
+@media (max-width: 900px) {
+  .purchaseForm {
+    grid-template-columns: 1fr;
+  }
+}

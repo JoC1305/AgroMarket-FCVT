@@ -1,6 +1,7 @@
 import { type FormEvent, useMemo, useState } from 'react'
 import AdminHeader from '../components/AdminHeader'
 import AdminSidebar from '../components/AdminSidebar'
+import PeriodFilter, { type DateFilter } from '../components/PeriodFilter'
 
 type Sale = {
   date: string
@@ -13,7 +14,7 @@ type Sale = {
 
 const initialSales: Sale[] = [
   {
-    date: '24/10/2023 09:15',
+    date: '22/07/2023 09:15',
     product: 'Fertilizante NPK 15-15-15',
     quantity: '10 bultos',
     unitPrice: '$1,250.00',
@@ -21,7 +22,7 @@ const initialSales: Sale[] = [
     payment: 'Transferencia',
   },
   {
-    date: '24/10/2023 10:30',
+    date: '20/10/2023 10:30',
     product: 'Semilla Maiz Hibrido F1',
     quantity: '5 bolsas',
     unitPrice: '$850.00',
@@ -29,7 +30,7 @@ const initialSales: Sale[] = [
     payment: 'Efectivo',
   },
   {
-    date: '24/10/2023 11:45',
+    date: '30/11/2023 11:45',
     product: 'Herbicida Glifosato 1L',
     quantity: '20 unid.',
     unitPrice: '$145.00',
@@ -96,6 +97,82 @@ function Ventas() {
     frequentPayment: 'Transferencia',
     creditTotal: currencyFormatter.format(totalCredits),
   }
+
+  const [dateFilter, setDateFilter] = useState<DateFilter>('dia')
+  const [fromDate, setFromDate] = useState('2023-10-24')
+  const [toDate, setToDate] = useState('2023-10-24')
+
+  const getAutoRange = (date: Date, filter: DateFilter) => {
+  if (filter === 'semana') {
+    const weekday = date.getDay()
+    const mondayOffset = weekday === 0 ? -6 : 1 - weekday
+
+    const start = new Date(date)
+    start.setDate(date.getDate() + mondayOffset)
+
+    const end = new Date(start)
+    end.setDate(start.getDate() + 6)
+
+    return { start, end }
+  }
+
+  if (filter === 'mes') {
+    const start = new Date(date.getFullYear(), date.getMonth(), 1)
+    const end = new Date(date.getFullYear(), date.getMonth() + 1, 0)
+    return { start, end }
+  }
+
+  return { start: date, end: date }
+}
+
+  const parseSaleDate = (saleDate: string) => {
+    const [datePart] = saleDate.split(' ')
+    const [day, month, year] = datePart.split('/')
+    return new Date(`${year}-${month}-${day}T00:00:00`)
+  }
+
+  const getReferenceDate = () => {
+    return fromDate ? new Date(`${fromDate}T00:00:00`) : new Date('2023-10-24T00:00:00')
+  }
+
+  // const getWeekBounds = (date: Date) => {
+  //   const weekday = date.getDay()
+  //   const mondayOffset = weekday === 0 ? -6 : 1 - weekday
+  //   const weekStart = new Date(date)
+  //   weekStart.setDate(date.getDate() + mondayOffset)
+  //   const weekEnd = new Date(weekStart)
+  //   weekEnd.setDate(weekStart.getDate() + 6)
+  //   return { weekStart, weekEnd }
+  // }
+
+  const isSaleInsideDateFilter = (sale: Sale) => {
+    const saleDate = parseSaleDate(sale.date)
+    const referenceDate = getReferenceDate()
+
+    if (dateFilter === 'dia') {
+      return saleDate.toDateString() === referenceDate.toDateString()
+    }
+
+    if (dateFilter === 'semana' || dateFilter === 'mes') {
+      const referenceDate = getReferenceDate()
+      const { start, end } = getAutoRange(referenceDate, dateFilter)
+
+      return saleDate >= start && saleDate <= end
+    }
+
+    if (dateFilter === 'anio') {
+      return saleDate.getFullYear() === referenceDate.getFullYear()
+    }
+
+    const start = fromDate ? new Date(`${fromDate}T00:00:00`) : null
+    const end = toDate ? new Date(`${toDate}T00:00:00`) : null
+    return (!start || saleDate >= start) && (!end || saleDate <= end)
+  }
+
+  const filteredSales = useMemo(
+    () => sales.filter((sale) => isSaleInsideDateFilter(sale)),
+    [sales, dateFilter, fromDate, toDate],
+  )
 
   const handleAddSale = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -222,22 +299,14 @@ function Ventas() {
           </section>
 
           <section className="sales-filter-panel" aria-label="Filtros de ventas">
-            <label>
-              Periodo <select defaultValue="dia" aria-label="Seleccionar periodo">
-                <option value="dia">Dia</option>
-                <option value="semana">Semana</option>
-                <option value="mes">Mes</option>
-                <option value="anio">Anio</option>
-                <option value="rango">Rango de fechas</option>
-              </select>
-            </label>
-            <label>
-              Desde <input type="date" defaultValue="2023-10-24" />
-            </label>
-            <label>
-              Hasta <input type="date" defaultValue="2023-10-24" />
-            </label>
-            <button type="button">Aplicar filtro</button>
+            <PeriodFilter
+              dateFilter={dateFilter}
+              fromDate={fromDate}
+              toDate={toDate}
+              onDateFilterChange={setDateFilter}
+              onFromDateChange={setFromDate}
+              onToDateChange={setToDate}
+            />
           </section>
 
           <section className="sales-table-panel">
@@ -251,7 +320,7 @@ function Ventas() {
                 <span role="columnheader">Metodo de pago</span>
               </div>
 
-              {sales.map((sale) => (
+              {filteredSales.map((sale) => (
                 <div className="sales-table-row" role="row" key={`${sale.date}-${sale.product}-${sale.total}`}>
                   <span role="cell">{sale.date}</span>
                   <strong role="cell">{sale.product}</strong>

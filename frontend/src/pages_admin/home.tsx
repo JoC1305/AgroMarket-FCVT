@@ -1,6 +1,8 @@
 import AdminHeader from '../components/AdminHeader'
 import AdminSidebar from '../components/AdminSidebar'
+import {useNavigate } from 'react-router-dom'
 import Icon, { type IconName }  from '../components/Icon'
+import { useMemo, useState } from 'react'
 
 
 type MetricTone = 'green' | 'coral' | 'teal' | 'slate'
@@ -9,7 +11,6 @@ const metrics: {
   label: string
   title: string
   value: string
-  detail: string
   icon: IconName
   tone: MetricTone
 }[] = [
@@ -17,7 +18,6 @@ const metrics: {
     label: 'Hoy',
     title: 'Ventas realizadas',
     value: '$3,120.50',
-    detail: '24 transacciones',
     icon: 'plus',
     tone: 'green',
   },
@@ -25,7 +25,6 @@ const metrics: {
     label: 'Mensual',
     title: 'Utilidades generadas',
     value: '$45,280.00',
-    detail: '12.5% vs mes anterior',
     icon: 'sales',
     tone: 'teal',
   },
@@ -33,7 +32,6 @@ const metrics: {
     label: 'Pendientes',
     title: 'Creditos abiertos',
     value: '$12,450.00',
-    detail: '8 facturas vencidas',
     icon: 'alerts',
     tone: 'coral',
   },
@@ -41,7 +39,6 @@ const metrics: {
     label: 'Suministros',
     title: 'Compras realizadas',
     value: '$8,900.00',
-    detail: 'Reposicion de stock semanal',
     icon: 'inventory',
     tone: 'slate',
   },
@@ -65,6 +62,20 @@ const movements = [
 const getStockPercent = (current: number, min: number) => Math.min(100, Math.round((current / min) * 100))
 
 function Home() {
+  const navigate = useNavigate()
+  const [movementType, setMovementType] = useState<'todos' | 'venta' | 'compra' | 'credito'>('todos')
+  const [appliedMovementType, setAppliedMovementType] = useState(movementType)
+  const [historyOpen, setHistoryOpen] = useState(false)
+
+  const movementsFiltrados = useMemo(
+    () =>
+      movements.filter((movement) => {
+        if (appliedMovementType === 'todos') return true
+        return movement.type.toLowerCase() === appliedMovementType
+      }),
+    [appliedMovementType]
+  )
+
   return (
     <main className="admin-shell" id="inicio">
       <AdminSidebar activePage="inicio" />
@@ -82,7 +93,7 @@ function Home() {
                 <span>{metric.label}</span>
                 <p>{metric.title}</p>
                 <strong>{metric.value}</strong>
-                <small>{metric.detail}</small>
+                {/* <small>{metric.detail}</small> */}
               </article>
             ))}
           </section>
@@ -91,7 +102,9 @@ function Home() {
             <article className="dashboard-panel stock-panel" id="inventario">
               <div className="panel-heading">
                 <h2>Productos con Bajo Stock</h2>
-                <a href="#inventario">Ver inventario</a>
+                <button type="button" className="secondary-action-button" onClick={() => navigate('/admin/inventario')}>
+                  Ver inventario
+                </button>
               </div>
 
               <div className="stock-table" role="table" aria-label="Productos con bajo stock">
@@ -130,10 +143,55 @@ function Home() {
               <div className="panel-heading">
                 <h2>Ultimos Movimientos</h2>
                 <div className="panel-actions">
-                  <button type="button">Filtrar</button>
-                  <button className="export-button" type="button">
-                    Exportar
+                  <select
+                    className="movement-filter-select"
+                    value={movementType}
+                    onChange={(event) => setMovementType(event.target.value as 'todos' | 'venta' | 'compra' | 'credito')}
+                  >
+                    <option value="todos">Todos</option>
+                    <option value="venta">Venta</option>
+                    <option value="compra">Compra</option>
+                    <option value="credito">Credito</option>
+                  </select>
+                  <button type="button" className="secondary-action-button" onClick={() => setAppliedMovementType(movementType)}>
+                    Filtrar
                   </button>
+                  <div className="history-dropdown">
+                    <button type="button" className="export-button" onClick={() => setHistoryOpen((open) => !open)}>
+                      Ver Historial
+                    </button>
+                    {historyOpen && (
+                      <div className="history-dropdown-menu">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigate('/admin/ventas')
+                            setHistoryOpen(false)
+                          }}
+                        >
+                          Ventas
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigate('/admin/compras')
+                            setHistoryOpen(false)
+                          }}
+                        >
+                          Compras
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigate('/admin/creditos')
+                            setHistoryOpen(false)
+                          }}
+                        >
+                          Creditos
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -144,7 +202,7 @@ function Home() {
                   <span role="columnheader">Producto</span>
                 </div>
 
-                {movements.map((movement) => (
+                {movementsFiltrados.map((movement) => (
                   <div className="movements-table-row" role="row" key={`${movement.date}-${movement.product}`}>
                     <span role="cell">{movement.date}</span>
                     <strong className={`movement-type ${movement.type.toLowerCase()}`} role="cell">

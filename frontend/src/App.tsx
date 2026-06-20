@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import AdminHeader from './components/AdminHeader'
 import AdminSidebar from './components/AdminSidebar'
 import AdminCompras from './pages_admin/Compras'
+import AdminCredito from './pages_admin/Credito'
 import AdminHome from './pages_admin/home'
 import AdminInventario from './pages_admin/Inventario'
 import AdminVentas from './pages_admin/Ventas'
@@ -193,7 +194,7 @@ function App() {
       <Route path="/admin/ventas" element={<AdminVentas />} />
       <Route path="/admin/inventario" element={<AdminInventario />} />
       <Route path="/admin/compras" element={<AdminCompras />} />
-      <Route path="/admin/creditos" element={<AdminPlaceholder page="creditos" />} />
+      <Route path="/admin/creditos" element={<AdminCredito />} />
       <Route path="/admin/clientes" element={<AdminPlaceholder page="clientes" />} />
       <Route path="/admin/proveedores" element={<AdminPlaceholder page="proveedores" />} />
       <Route path="/admin/usuarios" element={<AdminPlaceholder page="usuarios" />} />
