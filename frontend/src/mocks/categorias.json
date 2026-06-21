@@ -1,0 +1,56 @@
+[
+  {
+    "id": "CAT-001",
+    "nombre": "Fertilizantes",
+    "descripcion": "Nutrientes y mezclas para mejorar el rendimiento de cultivos.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-002",
+    "nombre": "Semillas",
+    "descripcion": "Semillas certificadas para produccion agricola.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-003",
+    "nombre": "Agroquimicos",
+    "descripcion": "Productos quimicos para manejo agricola especializado.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-004",
+    "nombre": "Sustratos",
+    "descripcion": "Sustratos y mezclas para viveros, huertos y jardines.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-005",
+    "nombre": "Herramientas",
+    "descripcion": "Herramientas manuales para trabajo de campo.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-006",
+    "nombre": "Indumentaria",
+    "descripcion": "Ropa y proteccion personal para labores agricolas.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-007",
+    "nombre": "Control agricola",
+    "descripcion": "Productos para control de plagas y enfermedades.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-008",
+    "nombre": "Cercas",
+    "descripcion": "Materiales para cerramientos y delimitacion de terrenos.",
+    "estado": "activa"
+  },
+  {
+    "id": "CAT-009",
+    "nombre": "Abonos",
+    "descripcion": "Abonos organicos y complementos de fertilizacion.",
+    "estado": "activa"
+  }
+]

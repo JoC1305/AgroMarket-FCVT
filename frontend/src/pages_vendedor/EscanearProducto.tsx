@@ -1,9 +1,10 @@
-import { useMemo, useRef, useState } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Quagga from '@ericblade/quagga2'
 import Header from '../components/VendedorHeader'
 import Icon from '../components/Icon'
 import Sidebar from '../components/VendedorSidebar'
+import categoriasData from '../mocks/categorias.json'
+import productosData from '../mocks/productos.json'
 
 type Product = {
   code: string
@@ -18,32 +19,17 @@ type SaleLine = Product & {
   quantity: number
 }
 
-const mockProducts: Product[] = [
-  {
-    code: '7501001234567',
-    name: 'Fertilizante organico 25 kg',
-    category: 'Fertilizantes',
-    price: 28.5,
-    stock: 12,
-    unit: 'saco',
-  },
-  {
-    code: '7861006801090',
-    name: 'Café oro 48g',
-    category: 'Comestibles',
-    price: 16.75,
-    stock: 8,
-    unit: 'funda',
-  },
-  {
-    code: '7705550011223',
-    name: 'Insecticida foliar 1 L',
-    category: 'Control agricola',
-    price: 12.9,
-    stock: 21,
-    unit: 'botella',
-  },
-]
+const categorias = categoriasData
+const categoryById = new Map(categorias.map((category) => [category.id, category]))
+
+const products: Product[] = productosData.map((product) => ({
+  code: product.codigoBarras,
+  name: product.nombre,
+  category: categoryById.get(product.categoriaId)?.nombre ?? product.categoriaId,
+  price: product.precioVenta,
+  stock: product.stockActual,
+  unit: product.unidad,
+}))
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('es-EC', {
@@ -65,10 +51,10 @@ function EscanearProducto() {
     const normalizedQuery = query.trim().toLowerCase()
 
     if (!normalizedQuery) {
-      return mockProducts
+      return products
     }
 
-    return mockProducts.filter((product) => {
+    return products.filter((product) => {
       return (
         product.code.includes(normalizedQuery) ||
         product.name.toLowerCase().includes(normalizedQuery) ||
@@ -80,11 +66,11 @@ function EscanearProducto() {
   const saleTotal = saleLines.reduce((total, line) => total + line.price * line.quantity, 0)
 
   const selectProductByCode = (code: string) => {
-    const product = mockProducts.find((item) => item.code === code)
+    const product = products.find((item) => item.code === code)
 
     if (!product) {
       setSelectedProduct(null)
-      setMessage(`No encontramos un producto mock con el codigo ${code}.`)
+      setMessage(`No encontramos un producto con el codigo ${code}.`)
       return
     }
 
@@ -126,7 +112,7 @@ function EscanearProducto() {
     setSaleLines([])
     setSelectedProduct(null)
     setQuery('')
-    setMessage(`Venta mock registrada por ${formatCurrency(saleTotal)}.`)
+    setMessage(`Venta de prueba registrada por ${formatCurrency(saleTotal)}.`)
   }
 
   useEffect(() => {
@@ -168,7 +154,7 @@ function EscanearProducto() {
 
         if (error) {
           setIsScanning(false)
-          setMessage('No se pudo iniciar la camara. Puedes usar los mocks de prueba.')
+          setMessage('No se pudo iniciar la camara. Puedes usar los productos de prueba.')
           return
         }
 
@@ -222,15 +208,15 @@ function EscanearProducto() {
                 <div className="scanner-placeholder">
                   <Icon name="scan" />
                   <strong>Escaner en espera</strong>
-                  <span>Activa la camara o usa un codigo mock.</span>
+                  <span>Activa la camara o usa un codigo de prueba.</span>
                 </div>
               )}
             </div>
 
             <p className="scanner-message">{message}</p>
 
-            <div className="mock-code-list" aria-label="Codigos mock">
-              {mockProducts.map((product) => (
+            <div className="mock-code-list" aria-label="Codigos de prueba">
+              {products.map((product) => (
                 <button className="mock-code-button" key={product.code} type="button" onClick={() => selectProductByCode(product.code)}>
                   <span>{product.code}</span>
                   <strong>{product.name}</strong>
@@ -319,11 +305,11 @@ function EscanearProducto() {
             )}
           </article>
 
-          <article className="panel mock-sale-panel" aria-label="Registro de venta mock">
+          <article className="panel mock-sale-panel" aria-label="Registro de venta de prueba">
             <div className="panel-header">
               <div>
                 <p className="eyebrow">Registro</p>
-                <h2>Venta mock</h2>
+                <h2>Venta de prueba</h2>
               </div>
               <button className="text-button" type="button" onClick={registerMockSale}>
                 Registrar

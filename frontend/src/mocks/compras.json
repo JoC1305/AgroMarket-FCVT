@@ -1,0 +1,92 @@
+[
+  {
+    "id": "CMP-001",
+    "fechaCompra": "2026-06-18",
+    "fechaEntrega": "2026-06-20",
+    "proveedorId": "PROV-001",
+    "registradoPorId": "USR-003",
+    "estado": "recibido",
+    "subtotal": 1247.8,
+    "total": 1247.8,
+    "items": [
+      {
+        "productoId": "PROD-001",
+        "cantidad": 50,
+        "unidad": "saco",
+        "precioUnitario": 18.75,
+        "total": 937.5
+      },
+      {
+        "productoId": "PROD-004",
+        "cantidad": 58,
+        "unidad": "saco",
+        "precioUnitario": 5.35,
+        "total": 310.3
+      }
+    ]
+  },
+  {
+    "id": "CMP-002",
+    "fechaCompra": "2026-06-18",
+    "fechaEntrega": "2026-06-23",
+    "proveedorId": "PROV-002",
+    "registradoPorId": "USR-003",
+    "estado": "en-camino",
+    "subtotal": 620,
+    "total": 620,
+    "items": [
+      {
+        "productoId": "PROD-002",
+        "cantidad": 50,
+        "unidad": "bolsa",
+        "precioUnitario": 12.4,
+        "total": 620
+      }
+    ]
+  },
+  {
+    "id": "CMP-003",
+    "fechaCompra": "2026-06-15",
+    "fechaEntrega": "2026-06-17",
+    "proveedorId": "PROV-003",
+    "registradoPorId": "USR-001",
+    "estado": "recibido",
+    "subtotal": 857,
+    "total": 857,
+    "items": [
+      {
+        "productoId": "PROD-003",
+        "cantidad": 60,
+        "unidad": "unidad",
+        "precioUnitario": 8.9,
+        "total": 534
+      },
+      {
+        "productoId": "PROD-007",
+        "cantidad": 34,
+        "unidad": "botella",
+        "precioUnitario": 9.5,
+        "total": 323
+      }
+    ]
+  },
+  {
+    "id": "CMP-004",
+    "fechaCompra": "2026-06-12",
+    "fechaEntrega": "2026-06-14",
+    "proveedorId": "PROV-005",
+    "registradoPorId": "USR-003",
+    "estado": "pendiente",
+    "subtotal": 960,
+    "total": 960,
+    "items": [
+      {
+        "productoId": "PROD-008",
+        "cantidad": 40,
+        "unidad": "rollo",
+        "precioUnitario": 24,
+        "total": 960
+      }
+    ]
+  }
+]

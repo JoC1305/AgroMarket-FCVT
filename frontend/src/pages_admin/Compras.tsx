@@ -4,7 +4,9 @@ import AdminSidebar from '../components/AdminSidebar'
 import Icon from '../components/Icon'
 import PeriodFilter, { type DateFilter } from '../components/PeriodFilter'
 import RegistrarCompra from '../components/RegistrarCompra'
-import { getPurchases } from '../services/purchaseService'
+import comprasData from '../mocks/compras.json'
+import productosData from '../mocks/productos.json'
+import proveedoresData from '../mocks/proveedores.json'
 import type { Purchase, PurchaseStatus } from '../types/purchase'
 import styles from './Compras.module.css'
 
@@ -21,7 +23,29 @@ type PurchaseFormData = {
   createdBy?: string
 }
 
-const purchases = getPurchases()
+const productos = productosData
+const proveedores = proveedoresData
+const productById = new Map(productos.map((product) => [product.id, product]))
+const providerById = new Map(proveedores.map((provider) => [provider.id, provider]))
+
+const purchases: Purchase[] = comprasData.map((purchase) => {
+  const mainItem = purchase.items[0]
+  const product = productById.get(mainItem.productoId)
+  const provider = providerById.get(purchase.proveedorId)
+
+  return {
+    id: purchase.id,
+    purchaseDate: purchase.fechaCompra,
+    deliveryDate: purchase.fechaEntrega,
+    product: purchase.items.map((item) => productById.get(item.productoId)?.nombre ?? item.productoId).join(' + '),
+    sku: product?.sku ?? mainItem.productoId,
+    quantity: purchase.items.reduce((total, item) => total + item.cantidad, 0),
+    unit: purchase.items.length === 1 ? mainItem.unidad : 'items',
+    provider: provider?.nombre ?? purchase.proveedorId,
+    purchasePrice: purchase.total,
+    status: purchase.estado as PurchaseStatus,
+  }
+})
 
 const currencyFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
