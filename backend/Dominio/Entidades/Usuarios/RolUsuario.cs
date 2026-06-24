@@ -1,8 +1,8 @@
-namespace Dominio.Entidades.Usuarios
+namespace Dominio.Entidades.Usuarios;
+
+public enum RolUsuario
 {
-    public enum RolUsuario
-    {
-        Administrador = 1,
-        Vendedor = 2,
-    }
+    Administrador = 1,
+    Vendedor = 2,
 }
+

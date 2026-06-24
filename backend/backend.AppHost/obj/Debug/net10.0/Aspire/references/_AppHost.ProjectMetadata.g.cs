@@ -17,5 +17,5 @@ public class backend_AppHost
     /// <summary>
     /// The path to the Aspire Host project.
     /// </summary>
-    public static string ProjectPath => """C:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost""";
+    public static string ProjectPath => """c:\Users\ASUS I7\Desktop\Agromarket-FCVT\backend\backend.AppHost""";
 }

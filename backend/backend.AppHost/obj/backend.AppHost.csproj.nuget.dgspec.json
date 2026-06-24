@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {}
+    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {
+    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
         "projectName": "backend.AppHost",
-        "projectPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
+        "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
         "packagesPath": "C:\\Users\\ASUS I7\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\obj\\",
+        "outputPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
+          "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
           "C:\\Users\\ASUS I7\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [

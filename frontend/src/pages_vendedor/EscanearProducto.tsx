@@ -20,7 +20,7 @@ type SaleLine = Product & {
 
 const mockProducts: Product[] = [
   {
-    code: '7501001234567',
+    code: '7861009942172',
     name: 'Fertilizante organico 25 kg',
     category: 'Fertilizantes',
     price: 28.5,

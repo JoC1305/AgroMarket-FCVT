@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj": {}
+    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj": {
+    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
-        "projectPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj",
+        "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\Dominio.csproj",
         "packagesPath": "C:\\Users\\ASUS I7\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\obj\\",
+        "outputPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
+          "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",
           "C:\\Users\\ASUS I7\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [

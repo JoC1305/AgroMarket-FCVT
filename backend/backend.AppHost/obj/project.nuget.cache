@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z95oc6rHoDA=",
+  "dgSpecHash": "50wa0ckuJpc=",
   "success": true,
-  "projectFilePath": "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
+  "projectFilePath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\backend.AppHost.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.4.5\\aspire.dashboard.sdk.win-x64.13.4.5.nupkg.sha512",
     "C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.hosting\\13.4.6\\aspire.hosting.13.4.6.nupkg.sha512",
