@@ -3,6 +3,7 @@ export type PurchaseStatus = 'recibido' | 'en-camino' | 'cancelado' | 'pendiente
 export type Purchase = {
   id: string
   purchaseDate: string
+  deliveryDate: string
   product: string
   sku: string
   quantity: number

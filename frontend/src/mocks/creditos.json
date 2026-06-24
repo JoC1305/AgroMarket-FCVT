@@ -1,0 +1,60 @@
+[
+  {
+    "id": "CRE-1824",
+    "ventaId": "VEN-1044",
+    "clienteId": "CLI-005",
+    "fechaApertura": "2026-06-18",
+    "fechaVencimiento": "2026-06-25",
+    "montoTotal": 150,
+    "saldoPendiente": 45,
+    "estado": "proximo",
+    "pagos": [
+      {
+        "id": "PAG-001",
+        "fecha": "2026-06-19",
+        "monto": 105,
+        "metodoPago": "efectivo"
+      }
+    ]
+  },
+  {
+    "id": "CRE-1825",
+    "ventaId": "VEN-1047",
+    "clienteId": "CLI-002",
+    "fechaApertura": "2026-06-20",
+    "fechaVencimiento": "2026-07-05",
+    "montoTotal": 125,
+    "saldoPendiente": 125,
+    "estado": "pendiente a vencer",
+    "pagos": []
+  },
+  {
+    "id": "CRE-1826",
+    "ventaId": null,
+    "clienteId": "CLI-001",
+    "fechaApertura": "2026-05-22",
+    "fechaVencimiento": "2026-06-15",
+    "montoTotal": 840,
+    "saldoPendiente": 840,
+    "estado": "vencido",
+    "pagos": []
+  },
+  {
+    "id": "CRE-1827",
+    "ventaId": null,
+    "clienteId": "CLI-004",
+    "fechaApertura": "2026-06-05",
+    "fechaVencimiento": "2026-06-28",
+    "montoTotal": 540,
+    "saldoPendiente": 210,
+    "estado": "pagado",
+    "pagos": [
+      {
+        "id": "PAG-002",
+        "fecha": "2026-06-12",
+        "monto": 330,
+        "metodoPago": "transferencia"
+      }
+    ]
+  }
+]

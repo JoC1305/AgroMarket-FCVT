@@ -2,18 +2,59 @@ import { useState } from 'react'
 import AdminHeader from '../components/AdminHeader'
 import AdminSidebar from '../components/AdminSidebar'
 import Icon from '../components/Icon'
-import { getPurchases } from '../services/purchaseService'
+import PeriodFilter, { type DateFilter } from '../components/PeriodFilter'
+import RegistrarCompra from '../components/RegistrarCompra'
+import comprasData from '../mocks/compras.json'
+import productosData from '../mocks/productos.json'
+import proveedoresData from '../mocks/proveedores.json'
 import type { Purchase, PurchaseStatus } from '../types/purchase'
 import styles from './Compras.module.css'
 
-type DateFilter = 'dia' | 'semana' | 'mes' | 'rango'
+type PurchaseFormData = {
+  id?: string
+  product: string
+  quantity: number
+  unit: string
+  provider: string
+  purchasePrice: number
+  status: PurchaseStatus
+  purchaseDate: string
+  deliveryDate: string
+  createdBy?: string
+}
 
-const purchases = getPurchases()
+const productos = productosData
+const proveedores = proveedoresData
+const productById = new Map(productos.map((product) => [product.id, product]))
+const providerById = new Map(proveedores.map((provider) => [provider.id, provider]))
+
+const purchases: Purchase[] = comprasData.map((purchase) => {
+  const mainItem = purchase.items[0]
+  const product = productById.get(mainItem.productoId)
+  const provider = providerById.get(purchase.proveedorId)
+
+  return {
+    id: purchase.id,
+    purchaseDate: purchase.fechaCompra,
+    deliveryDate: purchase.fechaEntrega,
+    product: purchase.items.map((item) => productById.get(item.productoId)?.nombre ?? item.productoId).join(' + '),
+    sku: product?.sku ?? mainItem.productoId,
+    quantity: purchase.items.reduce((total, item) => total + item.cantidad, 0),
+    unit: purchase.items.length === 1 ? mainItem.unidad : 'items',
+    provider: provider?.nombre ?? purchase.proveedorId,
+    purchasePrice: purchase.total,
+    status: purchase.estado as PurchaseStatus,
+  }
+})
 
 const currencyFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   style: 'currency',
 })
+
+function getCurrentDateString() {
+  return new Date().toISOString().slice(0, 10)
+}
 
 const formatDate = (dateValue: string) => {
   const date = new Date(`${dateValue}T00:00:00`)
@@ -46,22 +87,35 @@ const getStatusClass = (status: PurchaseStatus) => {
   return classes[status]
 }
 
+const getWeekBounds = (date: Date) => {
+  const weekday = date.getDay()
+  const mondayOffset = weekday === 0 ? -6 : 1 - weekday
+  const weekStart = new Date(date)
+  weekStart.setDate(date.getDate() + mondayOffset)
+  const weekEnd = new Date(weekStart)
+  weekEnd.setDate(weekStart.getDate() + 6)
+  return { weekStart, weekEnd }
+}
+
 const isInsideDateFilter = (purchase: Purchase, filter: DateFilter, from: string, to: string) => {
   const purchaseDate = new Date(`${purchase.purchaseDate}T00:00:00`)
-  const today = new Date('2026-06-18T00:00:00')
+  const referenceDate = from ? new Date(`${from}T00:00:00`) : new Date(`${getCurrentDateString()}T00:00:00`)
 
   if (filter === 'dia') {
-    return purchase.purchaseDate === '2026-06-18'
+    return purchaseDate.toDateString() === referenceDate.toDateString()
   }
 
   if (filter === 'semana') {
-    const start = new Date(today)
-    start.setDate(today.getDate() - 7)
-    return purchaseDate >= start && purchaseDate <= today
+    const { weekStart, weekEnd } = getWeekBounds(referenceDate)
+    return purchaseDate >= weekStart && purchaseDate <= weekEnd
   }
 
   if (filter === 'mes') {
-    return purchaseDate.getMonth() === today.getMonth() && purchaseDate.getFullYear() === today.getFullYear()
+    return purchaseDate.getMonth() === referenceDate.getMonth() && purchaseDate.getFullYear() === referenceDate.getFullYear()
+  }
+
+  if (filter === 'anio') {
+    return purchaseDate.getFullYear() === referenceDate.getFullYear()
   }
 
   const start = from ? new Date(`${from}T00:00:00`) : null
@@ -73,19 +127,22 @@ const isInsideDateFilter = (purchase: Purchase, filter: DateFilter, from: string
 function Compras() {
   const [query, setQuery] = useState('')
   const [dateFilter, setDateFilter] = useState<DateFilter>('mes')
-  const [fromDate, setFromDate] = useState('2026-06-01')
-  const [toDate, setToDate] = useState('2026-06-18')
+  const [fromDate, setFromDate] = useState(getCurrentDateString())
+  const [toDate, setToDate] = useState(getCurrentDateString())
   const [statusFilter, setStatusFilter] = useState<PurchaseStatus | 'todos'>('todos')
+  const [showPurchaseForm, setShowPurchaseForm] = useState(false)
+  const [editingPurchase, setEditingPurchase] = useState<Purchase | null>(null)
+  const [purchasesState, setPurchasesState] = useState<Purchase[]>(purchases)
 
-  const monthlyTotal = purchases
+  const monthlyTotal = purchasesState
     .filter((purchase) => isInsideDateFilter(purchase, 'mes', '', ''))
     .reduce((total, purchase) => total + purchase.purchasePrice, 0)
 
-  const activeProviders = new Set(purchases.map((purchase) => purchase.provider)).size
-  const pendingOrders = purchases.filter((purchase) => purchase.status === 'pendiente' || purchase.status === 'en-camino')
+  const activeProviders = new Set(purchasesState.map((purchase) => purchase.provider)).size
+  const pendingOrders = purchasesState.filter((purchase) => purchase.status === 'pendiente' || purchase.status === 'en-camino')
 
   const normalizedQuery = query.trim().toLowerCase()
-  const filteredPurchases = purchases.filter((purchase) => {
+  const filteredPurchases = purchasesState.filter((purchase) => {
     const matchesQuery =
       !normalizedQuery ||
       purchase.product.toLowerCase().includes(normalizedQuery) ||
@@ -99,9 +156,73 @@ function Compras() {
   const clearFilters = () => {
     setQuery('')
     setDateFilter('mes')
-    setFromDate('2026-06-01')
-    setToDate('2026-06-18')
+    setFromDate(getCurrentDateString())
+    setToDate(getCurrentDateString())
     setStatusFilter('todos')
+  }
+
+  const handleViewPurchase = (purchase: Purchase) => {
+    window.alert(
+      `Compra ${purchase.id} - ${purchase.product}\nProveedor: ${purchase.provider}\nCantidad: ${purchase.quantity} ${purchase.unit}\nPrecio total de compra: ${currencyFormatter.format(
+        purchase.purchasePrice,
+      )}\nPrecio por producto: ${currencyFormatter.format(purchase.purchasePrice / purchase.quantity)}\nEstado: ${getStatusLabel(purchase.status)}\nFecha de compra: ${formatDate(purchase.purchaseDate)}\nFecha de entrega: ${formatDate(purchase.deliveryDate)}`,
+    )
+  }
+
+  const handleEditPurchase = (purchase: Purchase) => {
+    if (purchase.status === 'recibido') {
+      window.alert('Este pedido ya fue recibido y no puede editarse.')
+      return
+    }
+
+    setEditingPurchase(purchase)
+    setShowPurchaseForm(true)
+  }
+
+  const handleDeletePurchase = (id: string) => {
+    if (!window.confirm('¿Eliminar esta compra?')) {
+      return
+    }
+
+    setPurchasesState((current) => current.filter((purchase) => purchase.id !== id))
+  }
+
+  const handleSavePurchase = (purchase: PurchaseFormData) => {
+    setPurchasesState((current) => {
+      if (purchase.id) {
+        return current.map((existing) =>
+          existing.id === purchase.id
+            ? {
+                ...existing,
+                product: purchase.product,
+                quantity: purchase.quantity,
+                unit: purchase.unit,
+                purchasePrice: purchase.purchasePrice,
+                status: purchase.status,
+                deliveryDate: purchase.deliveryDate,
+              }
+            : existing,
+        )
+      }
+
+      return [
+        {
+          id: `CMP-${String(current.length + 1).padStart(3, '0')}`,
+          purchaseDate: purchase.purchaseDate,
+          deliveryDate: purchase.deliveryDate,
+          product: purchase.product,
+          sku: purchase.provider.slice(0, 3).toUpperCase() + '-' + String(current.length + 1).padStart(3, '0'),
+          quantity: purchase.quantity,
+          unit: purchase.unit,
+          provider: purchase.provider,
+          purchasePrice: purchase.purchasePrice,
+          status: purchase.status,
+        },
+        ...current,
+      ]
+    })
+    setShowPurchaseForm(false)
+    setEditingPurchase(null)
   }
 
   return (
@@ -118,9 +239,21 @@ function Compras() {
               <h1>Registro de Compras</h1>
               <span className={styles.subtitle}></span>
             </div>
-            <button className={styles.primaryButton} type="button">
+            <button
+              className={styles.primaryButton}
+              type="button"
+              onClick={() => {
+                if (showPurchaseForm) {
+                  setShowPurchaseForm(false)
+                  setEditingPurchase(null)
+                } else {
+                  setEditingPurchase(null)
+                  setShowPurchaseForm(true)
+                }
+              }}
+            >
               <Icon name="plus" />
-              Registrar Nueva Compra
+              {showPurchaseForm ? 'Cerrar registro' : 'Registrar Nueva Compra'}
             </button>
           </div>
 
@@ -151,12 +284,39 @@ function Compras() {
               <div>
                 <span>Pedidos pendientes</span>
                 <strong>{String(pendingOrders.length).padStart(2, '0')}</strong>
+                <small>{pendingOrders.length > 0 ? `${pendingOrders.length} productos con atraso` : 'Sin atrasos'}</small>
               </div>
               <div className={styles.summaryIcon}>
                 <Icon name="alerts" />
               </div>
             </article>
           </section>
+
+          {showPurchaseForm && (
+            <RegistrarCompra
+              mode={editingPurchase ? 'edit' : 'new'}
+              initialValues={
+                editingPurchase
+                  ? {
+                      id: editingPurchase.id,
+                      product: editingPurchase.product,
+                      quantity: editingPurchase.quantity,
+                      unit: editingPurchase.unit,
+                      provider: editingPurchase.provider,
+                      purchasePrice: editingPurchase.purchasePrice,
+                      status: editingPurchase.status,
+                      purchaseDate: editingPurchase.purchaseDate,
+                      deliveryDate: editingPurchase.deliveryDate,
+                    }
+                  : undefined
+              }
+              onSave={handleSavePurchase}
+              onCancel={() => {
+                setShowPurchaseForm(false)
+                setEditingPurchase(null)
+              }}
+            />
+          )}
 
           <section className={styles.filterPanel} aria-label="Filtros de compras">
             <label>
@@ -168,23 +328,14 @@ function Compras() {
                 placeholder="Producto o proveedor"
               />
             </label>
-            <label>
-              Fecha
-              <select value={dateFilter} onChange={(event) => setDateFilter(event.target.value as DateFilter)}>
-                <option value="dia">Dia</option>
-                <option value="semana">Semana</option>
-                <option value="mes">Mes</option>
-                <option value="rango">Rango de fecha</option>
-              </select>
-            </label>
-            <label>
-              Desde
-              <input type="date" value={fromDate} onChange={(event) => setFromDate(event.target.value)} />
-            </label>
-            <label>
-              Hasta
-              <input type="date" value={toDate} onChange={(event) => setToDate(event.target.value)} />
-            </label>
+            <PeriodFilter
+              dateFilter={dateFilter}
+              fromDate={fromDate}
+              toDate={toDate}
+              onDateFilterChange={setDateFilter}
+              onFromDateChange={setFromDate}
+              onToDateChange={setToDate}
+            />
             <label>
               Estado
               <select
@@ -206,12 +357,14 @@ function Compras() {
           <section className={styles.tablePanel}>
             <div className={styles.table} role="table" aria-label="Compras realizadas">
               <div className={styles.tableHeader} role="row">
-                <span role="columnheader">Fecha de compra</span>
                 <span role="columnheader">Producto</span>
                 <span role="columnheader">Cantidad</span>
+                <span role="columnheader">Precio total</span>
+                <span role="columnheader">Precio unidad</span>
                 <span role="columnheader">Proveedor</span>
-                <span role="columnheader">Precio compra</span>
                 <span role="columnheader">Estado</span>
+                <span role="columnheader">Fecha de compra</span>
+                <span role="columnheader">Fecha de entrega</span>
                 <span role="columnheader">Acciones</span>
               </div>
 
@@ -221,7 +374,6 @@ function Compras() {
                   role="row"
                   key={purchase.id}
                 >
-                  <span role="cell">{formatDate(purchase.purchaseDate)}</span>
                   <div className={styles.productCell} role="cell">
                     <div className={styles.productIcon} aria-hidden="true">
                       {purchase.product.slice(0, 1)}
@@ -234,21 +386,43 @@ function Compras() {
                   <span role="cell">
                     {purchase.quantity} {purchase.unit}
                   </span>
-                  <span role="cell">{purchase.provider}</span>
                   <strong className={styles.amount} role="cell">
                     {currencyFormatter.format(purchase.purchasePrice)}
                   </strong>
+                  <strong className={styles.amount} role="cell">
+                    {currencyFormatter.format(purchase.purchasePrice / purchase.quantity)}
+                  </strong>
+                  <span role="cell">{purchase.provider}</span>
                   <span className={`${styles.statusBadge} ${getStatusClass(purchase.status)}`} role="cell">
                     {getStatusLabel(purchase.status)}
                   </span>
+                  <span role="cell">{formatDate(purchase.purchaseDate)}</span>
+                  <span role="cell">{formatDate(purchase.deliveryDate)}</span>
                   <div className={styles.actions} role="cell">
-                    <button className={styles.actionButton} type="button" aria-label={`Ver detalle de ${purchase.id}`}>
+                    <button
+                      className={styles.actionButton}
+                      type="button"
+                      onClick={() => handleViewPurchase(purchase)}
+                      aria-label={`Ver detalle de ${purchase.id}`}
+                    >
                       <Icon name="eye" />
                     </button>
-                    <button className={styles.actionButton} type="button" aria-label={`Editar ${purchase.id}`}>
+                    <button
+                      className={styles.actionButton}
+                      type="button"
+                      onClick={() => handleEditPurchase(purchase)}
+                      aria-label={`Editar ${purchase.id}`}
+                      disabled={purchase.status === 'recibido'}
+                      title={purchase.status === 'recibido' ? 'No se puede editar un pedido recibido' : 'Editar compra'}
+                    >
                       <Icon name="edit" />
                     </button>
-                    <button className={styles.actionButton} type="button" aria-label={`Eliminar ${purchase.id}`}>
+                    <button
+                      className={styles.actionButton}
+                      type="button"
+                      onClick={() => handleDeletePurchase(purchase.id)}
+                      aria-label={`Eliminar ${purchase.id}`}
+                    >
                       <Icon name="trash" />
                     </button>
                   </div>
@@ -258,7 +432,7 @@ function Compras() {
 
             <footer className={styles.footer}>
               <span>
-                Mostrando {filteredPurchases.length ? '1' : '0'}-{filteredPurchases.length} de {purchases.length}{' '}
+                Mostrando {filteredPurchases.length ? '1' : '0'}-{filteredPurchases.length} de {purchasesState.length}{' '}
                 registros
               </span>
               <div className={styles.pager}>

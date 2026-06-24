@@ -1,0 +1,67 @@
+[
+  {
+    "id": "CLI-001",
+    "nombre": "Finca Santa Rosa",
+    "tipo": "empresa",
+    "identificacion": "1391800010001",
+    "telefono": "0981234567",
+    "email": "compras@fincasantarosa.ec",
+    "direccion": "Via Rocafuerte km 8",
+    "ciudad": "Portoviejo",
+    "limiteCredito": 2500,
+    "saldoCredito": 840,
+    "estado": "activo"
+  },
+  {
+    "id": "CLI-002",
+    "nombre": "Carlos Mendoza",
+    "tipo": "persona",
+    "identificacion": "1309876543",
+    "telefono": "0992345678",
+    "email": "carlos.mendoza@email.com",
+    "direccion": "Parroquia Calderon",
+    "ciudad": "Portoviejo",
+    "limiteCredito": 900,
+    "saldoCredito": 125,
+    "estado": "activo"
+  },
+  {
+    "id": "CLI-003",
+    "nombre": "AgroCampo Norte",
+    "tipo": "empresa",
+    "identificacion": "1392400027001",
+    "telefono": "0987654321",
+    "email": "admin@agrocamponorte.ec",
+    "direccion": "Av. Manabi y America",
+    "ciudad": "Manta",
+    "limiteCredito": 3000,
+    "saldoCredito": 0,
+    "estado": "activo"
+  },
+  {
+    "id": "CLI-004",
+    "nombre": "Maria Zambrano",
+    "tipo": "persona",
+    "identificacion": "1312345678",
+    "telefono": "0973456789",
+    "email": "maria.zambrano@email.com",
+    "direccion": "Sitio El Guabito",
+    "ciudad": "Chone",
+    "limiteCredito": 700,
+    "saldoCredito": 210,
+    "estado": "activo"
+  },
+  {
+    "id": "CLI-005",
+    "nombre": "Juan Perez",
+    "tipo": "persona",
+    "identificacion": "1301122334",
+    "telefono": "0964567890",
+    "email": "juan.perez@email.com",
+    "direccion": "Via Santa Ana",
+    "ciudad": "Santa Ana",
+    "limiteCredito": 600,
+    "saldoCredito": 45,
+    "estado": "activo"
+  }
+]

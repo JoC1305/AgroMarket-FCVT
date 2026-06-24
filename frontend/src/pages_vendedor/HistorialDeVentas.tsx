@@ -1,49 +1,30 @@
-﻿import Header from '../components/VendedorHeader'
+import Header from '../components/VendedorHeader'
 import Icon from '../components/Icon'
 import Sidebar from '../components/VendedorSidebar'
+import clientesData from '../mocks/clientes.json'
+import ventasData from '../mocks/ventas.json'
 
-const salesHistory = [
-  {
-    id: '#VEN-9021',
-    date: '24 Oct, 2023',
-    time: '14:32',
-    client: 'Maria Alvarado',
-    initials: 'MA',
-    payment: 'Tarjeta de Credito',
-    status: 'Completado',
-    total: '$450.00',
-  },
-  {
-    id: '#VEN-9020',
-    date: '24 Oct, 2023',
-    time: '12:15',
-    client: 'Juan Rodriguez',
-    initials: 'JR',
-    payment: 'Efectivo',
-    status: 'Devuelto',
-    total: '$85.50',
-  },
-  {
-    id: '#VEN-9019',
-    date: '24 Oct, 2023',
-    time: '10:45',
-    client: 'Consumidor Final',
-    initials: 'CL',
-    payment: 'Transferencia',
-    status: 'Completado',
-    total: '$1,250.00',
-  },
-  {
-    id: '#VEN-9018',
-    date: '23 Oct, 2023',
-    time: '18:20',
-    client: 'Luis Martinez',
-    initials: 'LM',
-    payment: 'Tarjeta de Debito',
-    status: 'Completado',
-    total: '$215.75',
-  },
-]
+const currencyFormatter = new Intl.NumberFormat('es-EC', {
+  currency: 'USD',
+  style: 'currency',
+})
+
+const clientes = clientesData
+const ventas = ventasData
+const clientById = new Map(clientes.map((client) => [client.id, client]))
+const completedSales = ventas.filter((sale) => sale.estado === 'pagado')
+const totalSales = ventas.reduce((total, sale) => total + sale.total, 0)
+const averageSale = ventas.length ? totalSales / ventas.length : 0
+const completionRate = ventas.length ? Math.round((completedSales.length / ventas.length) * 100) : 0
+
+const salesHistory = [...ventas]
+  .sort((first, second) => new Date(second.fecha).getTime() - new Date(first.fecha).getTime())
+  .map((sale) => ({
+    id: sale.id,
+    client: clientById.get(sale.clienteId)?.nombre ?? sale.clienteId,
+    status: sale.estado === 'pendiente' ? 'Pendiente' : 'Completado',
+    total: currencyFormatter.format(sale.total),
+  }))
 
 function HistorialDeVentas() {
   return (
@@ -61,8 +42,8 @@ function HistorialDeVentas() {
         <section className="seller-summary" aria-label="Resumen del historial de ventas">
           <article className="metric-card">
             <span>Total ventas</span>
-            <strong>$128,450.00</strong>
-            <small>+12.5% vs mes anterior</small>
+            <strong>{currencyFormatter.format(totalSales)}</strong>
+            <small>{completedSales.length} ventas completadas</small>
             <div className="metric-icon metric-icon-0">
               <Icon name="trend" />
             </div>
@@ -70,8 +51,8 @@ function HistorialDeVentas() {
 
           <article className="metric-card">
             <span>Transacciones realizadas</span>
-            <strong>1,248</strong>
-            <small>Promedio: $102.90</small>
+            <strong>{ventas.length}</strong>
+            <small>Promedio: {currencyFormatter.format(averageSale)}</small>
             <div className="metric-icon metric-icon-1">
               <Icon name="sales" />
             </div>
@@ -79,7 +60,7 @@ function HistorialDeVentas() {
 
           <article className="metric-card">
             <span>Estado principal</span>
-            <strong>96%</strong>
+            <strong>{completionRate}%</strong>
             <small>Ventas completadas</small>
             <div className="metric-icon metric-icon-2">
               <Icon name="alerts" />
@@ -136,7 +117,7 @@ function HistorialDeVentas() {
                 <strong>{sale.id}</strong>
                 <span>{sale.client}</span>
                 <span>{sale.total}</span>
-                <span className={sale.status === 'Devuelto' ? 'status-pill pending' : 'status-pill'}>
+                <span className={sale.status === 'Pendiente' ? 'status-pill pending' : 'status-pill'}>
                   {sale.status}
                 </span>
                 <button className="table-action" type="button" aria-label={`Ver venta ${sale.id}`}>
@@ -147,9 +128,9 @@ function HistorialDeVentas() {
           </div>
 
           <div className="panel-header">
-            <span>Mostrando 1 a 10 de 1,248 resultados</span>
+            <span>Mostrando 1 a {salesHistory.length} de {salesHistory.length} resultados</span>
             <button className="text-button" type="button">
-              Pagina 1 de 125
+              Pagina 1 de 1
             </button>
           </div>
         </section>

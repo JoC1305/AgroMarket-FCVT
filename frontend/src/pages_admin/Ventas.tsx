@@ -1,6 +1,10 @@
 import { type FormEvent, useMemo, useState } from 'react'
 import AdminHeader from '../components/AdminHeader'
 import AdminSidebar from '../components/AdminSidebar'
+import PeriodFilter, { type DateFilter } from '../components/PeriodFilter'
+import creditosData from '../mocks/creditos.json'
+import productosData from '../mocks/productos.json'
+import ventasData from '../mocks/ventas.json'
 
 type Sale = {
   date: string
@@ -11,91 +15,167 @@ type Sale = {
   payment: string
 }
 
-const initialSales: Sale[] = [
-  {
-    date: '24/10/2023 09:15',
-    product: 'Fertilizante NPK 15-15-15',
-    quantity: '10 bultos',
-    unitPrice: '$1,250.00',
-    total: '$12,500.00',
-    payment: 'Transferencia',
-  },
-  {
-    date: '24/10/2023 10:30',
-    product: 'Semilla Maiz Hibrido F1',
-    quantity: '5 bolsas',
-    unitPrice: '$850.00',
-    total: '$4,250.00',
-    payment: 'Efectivo',
-  },
-  {
-    date: '24/10/2023 11:45',
-    product: 'Herbicida Glifosato 1L',
-    quantity: '20 unid.',
-    unitPrice: '$145.00',
-    total: '$2,900.00',
-    payment: 'Credito',
-  },
-  {
-    date: '24/10/2023 13:20',
-    product: 'Pala Forjada Herragro',
-    quantity: '2 unid.',
-    unitPrice: '$75.00',
-    total: '$150.00',
-    payment: 'Tarjeta',
-  },
-  {
-    date: '24/10/2023 15:05',
-    product: 'Alambre de Pua 400m',
-    quantity: '3 rollos',
-    unitPrice: '$320.00',
-    total: '$960.00',
-    payment: 'Transferencia',
-  },
-  {
-    date: '24/10/2023 16:30',
-    product: 'Bota Pantanera PVC',
-    quantity: '1 par',
-    unitPrice: '$45.00',
-    total: '$45.00',
-    payment: 'Efectivo',
-  },
-  {
-    date: '23/10/2023 08:20',
-    product: 'Melaza Cana de Azucar 20kg',
-    quantity: '5 bultos',
-    unitPrice: '$60.00',
-    total: '$300.00',
-    payment: 'Credito',
-  },
-]
-
 const currencyFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   style: 'currency',
 })
 
+const productos = productosData
+const ventas = ventasData
+const creditos = creditosData
+const productById = new Map(productos.map((product) => [product.id, product]))
+const paymentLabels: Record<string, string> = {
+  credito: 'Credito',
+  efectivo: 'Efectivo',
+  tarjeta: 'Tarjeta',
+  transferencia: 'Transferencia',
+}
+
+const formatSaleDate = (dateValue: string) => {
+  const date = new Date(dateValue)
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const year = date.getFullYear()
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+
+  return `${day}/${month}/${year} ${hours}:${minutes}`
+}
+
+const initialSales: Sale[] = ventas.map((sale) => ({
+  date: formatSaleDate(sale.fecha),
+  product: sale.items.map((item) => productById.get(item.productoId)?.nombre ?? item.productoId).join(' + '),
+  quantity: sale.items
+    .map((item) => {
+      const product = productById.get(item.productoId)
+      return `${item.cantidad} ${product?.unidad ?? 'unid.'}`
+    })
+    .join(' + '),
+  unitPrice: sale.items.length === 1 ? currencyFormatter.format(sale.items[0].precioUnitario) : 'Varios',
+  total: currencyFormatter.format(sale.total),
+  payment: paymentLabels[sale.metodoPago] ?? sale.metodoPago,
+}))
+
 const getInputValue = (formData: FormData, key: string) => String(formData.get(key) ?? '').trim()
+const referenceDate = new Date(Math.max(...ventas.map((sale) => new Date(sale.fecha).getTime())))
+const referenceDateInput = referenceDate.toISOString().slice(0, 10)
+const referenceDateDisplay = formatSaleDate(referenceDate.toISOString()).slice(0, 10)
+
+const parseCurrency = (value: string) => Number(value.replace(/[$,]/g, ''))
+
+const getMostFrequentPayment = (sales: Sale[]) => {
+  const paymentCounts = sales.reduce<Record<string, number>>((counts, sale) => {
+    counts[sale.payment] = (counts[sale.payment] ?? 0) + 1
+    return counts
+  }, {})
+
+  return Object.entries(paymentCounts).sort(([, first], [, second]) => second - first)[0]?.[0] ?? 'Sin ventas'
+}
+
+const getSaleProfit = (sale: (typeof ventas)[number]) =>
+  sale.items.reduce((total, item) => {
+    const product = productById.get(item.productoId)
+    return total + (item.precioUnitario - (product?.precioCompra ?? 0)) * item.cantidad
+  }, 0)
 
 function Ventas() {
   const [sales, setSales] = useState(initialSales)
   const [showSaleForm, setShowSaleForm] = useState(false)
 
   const totalCredits = useMemo(
-    () =>
-      sales
-        .filter((sale) => sale.payment === 'Credito')
-        .reduce((sum, sale) => sum + Number(sale.total.replace(/[$,]/g, '')), 0),
-    [sales],
+    () => creditos.reduce((sum, credit) => sum + credit.saldoPendiente, 0),
+    [],
   )
 
+  const salesToday = useMemo(() => sales.filter((sale) => sale.date.startsWith(referenceDateDisplay)), [sales])
+  const totalToday = useMemo(() => salesToday.reduce((sum, sale) => sum + parseCurrency(sale.total), 0), [salesToday])
+  const profitToday = ventas
+    .filter((sale) => sale.fecha.startsWith(referenceDateInput))
+    .reduce((sum, sale) => sum + getSaleProfit(sale), 0)
+
   const salesSummary = {
-    quantityToday: sales.filter((sale) => sale.date.startsWith('24/10/2023')).length,
-    totalToday: '$42,850.00',
-    profitToday: '$8,940.00',
-    frequentPayment: 'Transferencia',
+    quantityToday: salesToday.length,
+    totalToday: currencyFormatter.format(totalToday),
+    profitToday: currencyFormatter.format(profitToday),
+    frequentPayment: getMostFrequentPayment(sales),
     creditTotal: currencyFormatter.format(totalCredits),
   }
+
+  const [dateFilter, setDateFilter] = useState<DateFilter>('dia')
+  const [fromDate, setFromDate] = useState(referenceDateInput)
+  const [toDate, setToDate] = useState(referenceDateInput)
+
+  const getAutoRange = (date: Date, filter: DateFilter) => {
+  if (filter === 'semana') {
+    const weekday = date.getDay()
+    const mondayOffset = weekday === 0 ? -6 : 1 - weekday
+
+    const start = new Date(date)
+    start.setDate(date.getDate() + mondayOffset)
+
+    const end = new Date(start)
+    end.setDate(start.getDate() + 6)
+
+    return { start, end }
+  }
+
+  if (filter === 'mes') {
+    const start = new Date(date.getFullYear(), date.getMonth(), 1)
+    const end = new Date(date.getFullYear(), date.getMonth() + 1, 0)
+    return { start, end }
+  }
+
+  return { start: date, end: date }
+}
+
+  const parseSaleDate = (saleDate: string) => {
+    const [datePart] = saleDate.split(' ')
+    const [day, month, year] = datePart.split('/')
+    return new Date(`${year}-${month}-${day}T00:00:00`)
+  }
+
+  const getReferenceDate = () => {
+    return fromDate ? new Date(`${fromDate}T00:00:00`) : new Date(`${referenceDateInput}T00:00:00`)
+  }
+
+  // const getWeekBounds = (date: Date) => {
+  //   const weekday = date.getDay()
+  //   const mondayOffset = weekday === 0 ? -6 : 1 - weekday
+  //   const weekStart = new Date(date)
+  //   weekStart.setDate(date.getDate() + mondayOffset)
+  //   const weekEnd = new Date(weekStart)
+  //   weekEnd.setDate(weekStart.getDate() + 6)
+  //   return { weekStart, weekEnd }
+  // }
+
+  const isSaleInsideDateFilter = (sale: Sale) => {
+    const saleDate = parseSaleDate(sale.date)
+    const referenceDate = getReferenceDate()
+
+    if (dateFilter === 'dia') {
+      return saleDate.toDateString() === referenceDate.toDateString()
+    }
+
+    if (dateFilter === 'semana' || dateFilter === 'mes') {
+      const referenceDate = getReferenceDate()
+      const { start, end } = getAutoRange(referenceDate, dateFilter)
+
+      return saleDate >= start && saleDate <= end
+    }
+
+    if (dateFilter === 'anio') {
+      return saleDate.getFullYear() === referenceDate.getFullYear()
+    }
+
+    const start = fromDate ? new Date(`${fromDate}T00:00:00`) : null
+    const end = toDate ? new Date(`${toDate}T00:00:00`) : null
+    return (!start || saleDate >= start) && (!end || saleDate <= end)
+  }
+
+  const filteredSales = useMemo(
+    () => sales.filter((sale) => isSaleInsideDateFilter(sale)),
+    [sales, dateFilter, fromDate, toDate],
+  )
 
   const handleAddSale = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -158,7 +238,7 @@ function Ventas() {
               </div>
               <form className="new-sale-form" onSubmit={handleAddSale}>
                 <label>
-                  Fecha <input name="date" type="date" defaultValue="2023-10-24" required />
+                  Fecha <input name="date" type="date" defaultValue={referenceDateInput} required />
                 </label>
                 <label>
                   Hora <input name="time" type="time" defaultValue="17:00" required />
@@ -211,33 +291,25 @@ function Ventas() {
             <article className="sales-small-card">
               <span>Metodo de pago mas frecuente</span>
               <strong>{salesSummary.frequentPayment}</strong>
-              <p>45% del volumen total</p>
+              <p>Metodo mas usado en los registros</p>
             </article>
 
             <article className="sales-small-card sales-credit-card">
               <span>Total en creditos realizados</span>
               <strong>{salesSummary.creditTotal}</strong>
-              <p>15 cuentas por cobrar</p>
+              <p>{creditos.filter((credit) => credit.saldoPendiente > 0).length} cuentas por cobrar</p>
             </article>
           </section>
 
           <section className="sales-filter-panel" aria-label="Filtros de ventas">
-            <label>
-              Periodo <select defaultValue="dia" aria-label="Seleccionar periodo">
-                <option value="dia">Dia</option>
-                <option value="semana">Semana</option>
-                <option value="mes">Mes</option>
-                <option value="anio">Anio</option>
-                <option value="rango">Rango de fechas</option>
-              </select>
-            </label>
-            <label>
-              Desde <input type="date" defaultValue="2023-10-24" />
-            </label>
-            <label>
-              Hasta <input type="date" defaultValue="2023-10-24" />
-            </label>
-            <button type="button">Aplicar filtro</button>
+            <PeriodFilter
+              dateFilter={dateFilter}
+              fromDate={fromDate}
+              toDate={toDate}
+              onDateFilterChange={setDateFilter}
+              onFromDateChange={setFromDate}
+              onToDateChange={setToDate}
+            />
           </section>
 
           <section className="sales-table-panel">
@@ -251,7 +323,7 @@ function Ventas() {
                 <span role="columnheader">Metodo de pago</span>
               </div>
 
-              {sales.map((sale) => (
+              {filteredSales.map((sale) => (
                 <div className="sales-table-row" role="row" key={`${sale.date}-${sale.product}-${sale.total}`}>
                   <span role="cell">{sale.date}</span>
                   <strong role="cell">{sale.product}</strong>

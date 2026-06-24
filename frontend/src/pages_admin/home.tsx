@@ -1,70 +1,149 @@
 import AdminHeader from '../components/AdminHeader'
 import AdminSidebar from '../components/AdminSidebar'
+import {useNavigate } from 'react-router-dom'
 import Icon, { type IconName }  from '../components/Icon'
+import { useMemo, useState } from 'react'
+import comprasData from '../mocks/compras.json'
+import creditosData from '../mocks/creditos.json'
+import productosData from '../mocks/productos.json'
+import ventasData from '../mocks/ventas.json'
 
 
 type MetricTone = 'green' | 'coral' | 'teal' | 'slate'
+type Movement = {
+  date: string
+  timestamp: number
+  type: 'Venta' | 'Compra' | 'Credito'
+  product: string
+}
 
-const metrics: {
+type Metric = {
   label: string
   title: string
   value: string
-  detail: string
   icon: IconName
   tone: MetricTone
-}[] = [
+}
+
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+  currency: 'USD',
+  style: 'currency',
+})
+
+const productos = productosData
+const ventas = ventasData
+const compras = comprasData
+const creditos = creditosData
+
+const productById = new Map(productos.map((product) => [product.id, product]))
+const referenceDate = new Date(Math.max(...ventas.map((sale) => new Date(sale.fecha).getTime())))
+const referenceDay = referenceDate.toISOString().slice(0, 10)
+
+const isReferenceMonth = (dateValue: string) => {
+  const date = new Date(dateValue)
+  return date.getMonth() === referenceDate.getMonth() && date.getFullYear() === referenceDate.getFullYear()
+}
+
+const getSaleProfit = (sale: (typeof ventas)[number]) =>
+  sale.items.reduce((total, item) => {
+    const product = productById.get(item.productoId)
+    return total + (item.precioUnitario - (product?.precioCompra ?? 0)) * item.cantidad
+  }, 0)
+
+const getProductNames = (items: Array<{ productoId: string }>) =>
+  items.map((item) => productById.get(item.productoId)?.nombre ?? item.productoId).join(' + ')
+
+const metrics: Metric[] = [
   {
     label: 'Hoy',
     title: 'Ventas realizadas',
-    value: '$3,120.50',
-    detail: '24 transacciones',
+    value: currencyFormatter.format(
+      ventas.filter((sale) => sale.fecha.startsWith(referenceDay)).reduce((total, sale) => total + sale.total, 0),
+    ),
     icon: 'plus',
     tone: 'green',
   },
   {
     label: 'Mensual',
     title: 'Utilidades generadas',
-    value: '$45,280.00',
-    detail: '12.5% vs mes anterior',
+    value: currencyFormatter.format(
+      ventas.filter((sale) => isReferenceMonth(sale.fecha)).reduce((total, sale) => total + getSaleProfit(sale), 0),
+    ),
     icon: 'sales',
     tone: 'teal',
   },
   {
     label: 'Pendientes',
     title: 'Creditos abiertos',
-    value: '$12,450.00',
-    detail: '8 facturas vencidas',
+    value: currencyFormatter.format(creditos.reduce((total, credit) => total + credit.saldoPendiente, 0)),
     icon: 'alerts',
     tone: 'coral',
   },
   {
     label: 'Suministros',
     title: 'Compras realizadas',
-    value: '$8,900.00',
-    detail: 'Reposicion de stock semanal',
+    value: currencyFormatter.format(
+      compras.filter((purchase) => isReferenceMonth(purchase.fechaCompra)).reduce((total, purchase) => total + purchase.total, 0),
+    ),
     icon: 'inventory',
     tone: 'slate',
   },
 ]
 
-const lowStockProducts = [
-  { name: 'Fertilizante NPK 15-15-15', current: 12, min: 50, unit: 'kg', status: 'Critico' },
-  { name: 'Semilla de Maiz Hibrido', current: 8, min: 20, unit: 'sacos', status: 'Bajo' },
-  { name: 'Herbicida Glifosato 1L', current: 15, min: 30, unit: 'unid', status: 'Bajo' },
-  { name: 'Sustrato Premium 50L', current: 5, min: 15, unit: 'sacos', status: 'Critico' },
-]
+const lowStockProducts = productos
+  .filter((product) => product.stockActual <= product.stockMinimo)
+  .map((product) => ({
+    name: product.nombre,
+    current: product.stockActual,
+    min: product.stockMinimo,
+    unit: product.unidad,
+    status: product.stockActual <= product.stockMinimo * 0.4 ? 'Critico' : 'Bajo',
+  }))
 
-const movements = [
-  { date: '24/05 14:30', type: 'Venta', product: 'Fertilizante NPK + Semillas' },
-  { date: '24/05 12:15', type: 'Compra', product: 'Reposicion Pesticidas ABC' },
-  { date: '24/05 09:45', type: 'Credito', product: 'Venta al por mayor - Cliente Juan P.' },
-  { date: '23/05 17:20', type: 'Venta', product: 'Herramientas de Poda x12' },
-  { date: '23/05 16:00', type: 'Venta', product: 'Bolsas de Tierra Organica' },
-]
+const movements: Movement[] = [
+  ...ventas.map((sale) => ({
+    date: new Intl.DateTimeFormat('es-EC', { day: '2-digit', hour: '2-digit', minute: '2-digit', month: '2-digit' }).format(
+      new Date(sale.fecha),
+    ),
+    timestamp: new Date(sale.fecha).getTime(),
+    type: 'Venta' as const,
+    product: getProductNames(sale.items),
+  })),
+  ...compras.map((purchase) => ({
+    date: new Intl.DateTimeFormat('es-EC', { day: '2-digit', hour: '2-digit', minute: '2-digit', month: '2-digit' }).format(
+      new Date(`${purchase.fechaCompra}T12:00:00`),
+    ),
+    timestamp: new Date(`${purchase.fechaCompra}T12:00:00`).getTime(),
+    type: 'Compra' as const,
+    product: getProductNames(purchase.items),
+  })),
+  ...creditos.map((credit) => ({
+    date: new Intl.DateTimeFormat('es-EC', { day: '2-digit', hour: '2-digit', minute: '2-digit', month: '2-digit' }).format(
+      new Date(`${credit.fechaApertura}T09:00:00`),
+    ),
+    timestamp: new Date(`${credit.fechaApertura}T09:00:00`).getTime(),
+    type: 'Credito' as const,
+    product: `Credito ${credit.id}`,
+  })),
+].sort((a, b) => b.timestamp - a.timestamp)
 
 const getStockPercent = (current: number, min: number) => Math.min(100, Math.round((current / min) * 100))
 
 function Home() {
+  const navigate = useNavigate()
+  const [movementType, setMovementType] = useState<'todos' | 'venta' | 'compra' | 'credito'>('todos')
+  const [appliedMovementType, setAppliedMovementType] = useState(movementType)
+  const [historyOpen, setHistoryOpen] = useState(false)
+
+  const movementsFiltrados = useMemo(
+    () =>
+      movements.filter((movement) => {
+        if (appliedMovementType === 'todos') return true
+        return movement.type.toLowerCase() === appliedMovementType
+      }),
+    [appliedMovementType]
+  )
+
   return (
     <main className="admin-shell" id="inicio">
       <AdminSidebar activePage="inicio" />
@@ -82,7 +161,7 @@ function Home() {
                 <span>{metric.label}</span>
                 <p>{metric.title}</p>
                 <strong>{metric.value}</strong>
-                <small>{metric.detail}</small>
+                {/* <small>{metric.detail}</small> */}
               </article>
             ))}
           </section>
@@ -91,7 +170,9 @@ function Home() {
             <article className="dashboard-panel stock-panel" id="inventario">
               <div className="panel-heading">
                 <h2>Productos con Bajo Stock</h2>
-                <a href="#inventario">Ver inventario</a>
+                <button type="button" className="secondary-action-button" onClick={() => navigate('/admin/inventario')}>
+                  Ver inventario
+                </button>
               </div>
 
               <div className="stock-table" role="table" aria-label="Productos con bajo stock">
@@ -130,10 +211,55 @@ function Home() {
               <div className="panel-heading">
                 <h2>Ultimos Movimientos</h2>
                 <div className="panel-actions">
-                  <button type="button">Filtrar</button>
-                  <button className="export-button" type="button">
-                    Exportar
+                  <select
+                    className="movement-filter-select"
+                    value={movementType}
+                    onChange={(event) => setMovementType(event.target.value as 'todos' | 'venta' | 'compra' | 'credito')}
+                  >
+                    <option value="todos">Todos</option>
+                    <option value="venta">Venta</option>
+                    <option value="compra">Compra</option>
+                    <option value="credito">Credito</option>
+                  </select>
+                  <button type="button" className="secondary-action-button" onClick={() => setAppliedMovementType(movementType)}>
+                    Filtrar
                   </button>
+                  <div className="history-dropdown">
+                    <button type="button" className="export-button" onClick={() => setHistoryOpen((open) => !open)}>
+                      Ver Historial
+                    </button>
+                    {historyOpen && (
+                      <div className="history-dropdown-menu">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigate('/admin/ventas')
+                            setHistoryOpen(false)
+                          }}
+                        >
+                          Ventas
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigate('/admin/compras')
+                            setHistoryOpen(false)
+                          }}
+                        >
+                          Compras
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigate('/admin/creditos')
+                            setHistoryOpen(false)
+                          }}
+                        >
+                          Creditos
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -144,7 +270,7 @@ function Home() {
                   <span role="columnheader">Producto</span>
                 </div>
 
-                {movements.map((movement) => (
+                {movementsFiltrados.map((movement) => (
                   <div className="movements-table-row" role="row" key={`${movement.date}-${movement.product}`}>
                     <span role="cell">{movement.date}</span>
                     <strong className={`movement-type ${movement.type.toLowerCase()}`} role="cell">

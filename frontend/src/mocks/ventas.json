@@ -1,0 +1,120 @@
+[
+  {
+    "id": "VEN-1048",
+    "fecha": "2026-06-20T09:30:00-05:00",
+    "clienteId": "CLI-001",
+    "vendedorId": "USR-002",
+    "metodoPago": "transferencia",
+    "estado": "pagado",
+    "subtotal": 337.5,
+    "descuento": 0,
+    "impuesto": 0,
+    "total": 337.5,
+    "items": [
+      {
+        "productoId": "PROD-001",
+        "cantidad": 10,
+        "precioUnitario": 25.5,
+        "total": 255
+      },
+      {
+        "productoId": "PROD-003",
+        "cantidad": 6,
+        "precioUnitario": 13.75,
+        "total": 82.5
+      }
+    ]
+  },
+  {
+    "id": "VEN-1047",
+    "fecha": "2026-06-20T10:45:00-05:00",
+    "clienteId": "CLI-002",
+    "vendedorId": "USR-002",
+    "metodoPago": "credito",
+    "estado": "pendiente",
+    "subtotal": 125,
+    "descuento": 0,
+    "impuesto": 0,
+    "total": 125,
+    "items": [
+      {
+        "productoId": "PROD-005",
+        "cantidad": 4,
+        "precioUnitario": 31.25,
+        "total": 125
+      }
+    ]
+  },
+  {
+    "id": "VEN-1046",
+    "fecha": "2026-06-20T12:10:00-05:00",
+    "clienteId": "CLI-003",
+    "vendedorId": "USR-002",
+    "metodoPago": "efectivo",
+    "estado": "pagado",
+    "subtotal": 780,
+    "descuento": 0,
+    "impuesto": 0,
+    "total": 780,
+    "items": [
+      {
+        "productoId": "PROD-002",
+        "cantidad": 25,
+        "precioUnitario": 18,
+        "total": 450
+      },
+      {
+        "productoId": "PROD-006",
+        "cantidad": 15,
+        "precioUnitario": 22,
+        "total": 330
+      }
+    ]
+  },
+  {
+    "id": "VEN-1045",
+    "fecha": "2026-06-19T16:20:00-05:00",
+    "clienteId": "CLI-004",
+    "vendedorId": "USR-002",
+    "metodoPago": "tarjeta",
+    "estado": "pagado",
+    "subtotal": 96,
+    "descuento": 0,
+    "impuesto": 0,
+    "total": 96,
+    "items": [
+      {
+        "productoId": "PROD-008",
+        "cantidad": 3,
+        "precioUnitario": 32,
+        "total": 96
+      }
+    ]
+  },
+  {
+    "id": "VEN-1044",
+    "fecha": "2026-06-18T14:05:00-05:00",
+    "clienteId": "CLI-005",
+    "vendedorId": "USR-002",
+    "metodoPago": "credito",
+    "estado": "pendiente",
+    "subtotal": 150,
+    "descuento": 0,
+    "impuesto": 0,
+    "total": 150,
+    "items": [
+      {
+        "productoId": "PROD-004",
+        "cantidad": 10,
+        "precioUnitario": 8.5,
+        "total": 85
+      },
+      {
+        "productoId": "PROD-007",
+        "cantidad": 5,
+        "precioUnitario": 13,
+        "total": 65
+      }
+    ]
+  }
+]

@@ -1,6 +1,9 @@
 import AdminHeader from '../components/AdminHeader'
 import AdminSidebar from '../components/AdminSidebar'
 import Icon, { type IconName } from '../components/Icon'
+import categoriasData from '../mocks/categorias.json'
+import productosData from '../mocks/productos.json'
+import ventasData from '../mocks/ventas.json'
 
 type InventoryStatus = 'Alto' | 'Medio' | 'Bajo'
 
@@ -14,67 +17,46 @@ type InventoryProduct = {
   soldThisMonth: number
 }
 
-const inventoryProducts: InventoryProduct[] = [
-  {
-    name: 'Fertilizante NPK 15-15-15',
-    category: 'Fertilizantes',
-    stock: 156,
-    status: 'Alto',
-    purchasePrice: 18.75,
-    salePrice: 25.5,
-    soldThisMonth: 42,
-  },
-  {
-    name: 'Semilla Maiz Hibrido F1',
-    category: 'Semillas',
-    stock: 12,
-    status: 'Bajo',
-    purchasePrice: 12.4,
-    salePrice: 18.0,
-    soldThisMonth: 31,
-  },
-  {
-    name: 'Herbicida Glifosato 1L',
-    category: 'Agroquimicos',
-    stock: 28,
-    status: 'Medio',
-    purchasePrice: 8.9,
-    salePrice: 13.75,
-    soldThisMonth: 64,
-  },
-  {
-    name: 'Sustrato Premium 50L',
-    category: 'Sustratos',
-    stock: 9,
-    status: 'Bajo',
-    purchasePrice: 5.35,
-    salePrice: 8.5,
-    soldThisMonth: 20,
-  },
-  {
-    name: 'Pala Forjada Herragro',
-    category: 'Herramientas',
-    stock: 74,
-    status: 'Alto',
-    purchasePrice: 21.0,
-    salePrice: 31.25,
-    soldThisMonth: 18,
-  },
-  {
-    name: 'Bota Pantanera PVC',
-    category: 'Indumentaria',
-    stock: 35,
-    status: 'Medio',
-    purchasePrice: 14.2,
-    salePrice: 22.0,
-    soldThisMonth: 27,
-  },
-]
-
 const currencyFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   style: 'currency',
 })
+
+const productos = productosData
+const categorias = categoriasData
+const ventas = ventasData
+const categoryById = new Map(categorias.map((category) => [category.id, category]))
+const referenceDate = new Date(Math.max(...ventas.map((sale) => new Date(sale.fecha).getTime())))
+
+const isReferenceMonth = (dateValue: string) => {
+  const date = new Date(dateValue)
+  return date.getMonth() === referenceDate.getMonth() && date.getFullYear() === referenceDate.getFullYear()
+}
+
+const statusLabels: Record<(typeof productos)[number]['estado'], InventoryStatus> = {
+  alto: 'Alto',
+  bajo: 'Bajo',
+  medio: 'Medio',
+}
+
+const getSoldThisMonth = (productId: string) =>
+  ventas
+    .filter((sale) => isReferenceMonth(sale.fecha))
+    .reduce(
+      (total, sale) =>
+        total + sale.items.filter((item) => item.productoId === productId).reduce((itemsTotal, item) => itemsTotal + item.cantidad, 0),
+      0,
+    )
+
+const inventoryProducts: InventoryProduct[] = productos.map((product) => ({
+  name: product.nombre,
+  category: categoryById.get(product.categoriaId)?.nombre ?? product.categoriaId,
+  stock: product.stockActual,
+  status: statusLabels[product.estado],
+  purchasePrice: product.precioCompra,
+  salePrice: product.precioVenta,
+  soldThisMonth: getSoldThisMonth(product.id),
+}))
 
 const inventoryValue = inventoryProducts.reduce(
   (total, product) => total + product.stock * product.purchasePrice,

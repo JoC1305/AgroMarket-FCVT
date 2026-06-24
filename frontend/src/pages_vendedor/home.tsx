@@ -1,39 +1,99 @@
-import Icon from '../components/Icon'
+import Icon, { type IconName } from '../components/Icon'
 import Header from '../components/VendedorHeader'
 import Sidebar from '../components/VendedorSidebar'
+import categoriasData from '../mocks/categorias.json'
+import clientesData from '../mocks/clientes.json'
+import creditosData from '../mocks/creditos.json'
+import productosData from '../mocks/productos.json'
+import ventasData from '../mocks/ventas.json'
 import '../styles/seller.css'
 
-const metrics = [
-  { label: 'Ventas de hoy', value: '$ 1.240', detail: '+8 ventas registradas', icon: 'sales' },
-  { label: 'Productos vendidos', value: '86', detail: '12 categorias activas', icon: 'inventory' },
-  { label: 'Alertas activas', value: '5', detail: '2 requieren revision', icon: 'alerts' },
-] as const
+type Metric = {
+  label: string
+  value: string
+  detail: string
+  icon: IconName
+}
 
-const latestSales = [
-  { code: '#V-1048', client: 'Finca Santa Rosa', amount: '$ 340', status: 'Pagado' },
-  { code: '#V-1047', client: 'Carlos Mendoza', amount: '$ 125', status: 'Pendiente' },
-  { code: '#V-1046', client: 'AgroCampo Norte', amount: '$ 780', status: 'Pagado' },
-  { code: '#V-1045', client: 'Maria Zambrano', amount: '$ 96', status: 'Pagado' },
+const currencyFormatter = new Intl.NumberFormat('es-EC', {
+  currency: 'USD',
+  style: 'currency',
+})
+
+const clientes = clientesData
+const creditos = creditosData
+const categorias = categoriasData
+const productos = productosData
+const ventas = ventasData
+const clientById = new Map(clientes.map((client) => [client.id, client]))
+const referenceDate = new Date(Math.max(...ventas.map((sale) => new Date(sale.fecha).getTime())))
+const referenceDay = referenceDate.toISOString().slice(0, 10)
+
+const todaySales = ventas.filter((sale) => sale.fecha.startsWith(referenceDay))
+const lowStock = productos
+  .filter((product) => product.stockActual <= product.stockMinimo)
+  .map((product) => ({ product: product.nombre, stock: product.stockActual, min: product.stockMinimo }))
+  .slice(0, 3)
+const dueCredits = creditos.filter((credit) => credit.estado === 'proximo' || credit.estado === 'vencido')
+const pendingSales = ventas.filter((sale) => sale.estado === 'pendiente')
+const activeAlerts = lowStock.length + dueCredits.length + pendingSales.length
+
+const metrics: Metric[] = [
+  {
+    label: 'Ventas de hoy',
+    value: currencyFormatter.format(todaySales.reduce((total, sale) => total + sale.total, 0)),
+    detail: `+${todaySales.length} ventas registradas`,
+    icon: 'sales',
+  },
+  {
+    label: 'Productos vendidos',
+    value: String(todaySales.reduce((total, sale) => total + sale.items.reduce((sum, item) => sum + item.cantidad, 0), 0)),
+    detail: `${categorias.filter((category) => category.estado === 'activa').length} categorias activas`,
+    icon: 'inventory',
+  },
+  {
+    label: 'Alertas activas',
+    value: String(activeAlerts),
+    detail: `${dueCredits.length} requieren revision`,
+    icon: 'alerts',
+  },
 ]
 
-const lowStock = [
-  { product: 'Fertilizante organico 25 kg', stock: 12, min: 20 },
-  { product: 'Semilla de maiz hibrido', stock: 8, min: 15 },
-  { product: 'Sacos de yute', stock: 18, min: 30 },
-]
+const latestSales = [...ventas]
+  .sort((first, second) => new Date(second.fecha).getTime() - new Date(first.fecha).getTime())
+  .slice(0, 4)
+  .map((sale) => ({
+    code: sale.id,
+    client: clientById.get(sale.clienteId)?.nombre ?? sale.clienteId,
+    amount: currencyFormatter.format(sale.total),
+    status: sale.estado === 'pendiente' ? 'Pendiente' : 'Pagado',
+  }))
 
 const alerts = [
-  { label: 'Stock bajo', value: '2', tone: 'danger' },
-  { label: 'Creditos por vencer', value: '3', tone: 'warning' },
-  { label: 'Ventas sin revisar', value: '4', tone: 'info' },
+  { label: 'Stock bajo', value: String(lowStock.length), tone: 'danger' },
+  { label: 'Creditos por vencer', value: String(dueCredits.length), tone: 'warning' },
+  { label: 'Ventas sin revisar', value: String(pendingSales.length), tone: 'info' },
 ]
 
-const expirations = [
-  { product: 'Insecticida foliar', detail: 'Vence en 5 dias', tone: 'danger' },
-  { product: 'Abono premium', detail: 'Vence en 12 dias', tone: 'warning' },
-  { product: 'Fungicida cobre', detail: 'Vence en 28 dias', tone: 'muted' },
-  { product: 'Vitaminas de cultivo', detail: 'Vence en 35 dias', tone: 'muted' },
-]
+const expirations = productos
+  .filter((product) => product.fechaVencimiento)
+  .map((product) => {
+    const days = Math.ceil((new Date(`${product.fechaVencimiento}T00:00:00`).getTime() - referenceDate.getTime()) / (1000 * 60 * 60 * 24))
+    const tone = days <= 7 ? 'danger' : days <= 15 ? 'warning' : 'muted'
+
+    return {
+      product: product.nombre,
+      detail: days <= 0 ? 'Vence hoy' : `Vence en ${days} dias`,
+      tone,
+    }
+  })
+  .filter((product) => !product.detail.includes('-'))
+  .sort((first, second) => {
+    const firstDays = Number(first.detail.replace(/\D/g, '')) || 0
+    const secondDays = Number(second.detail.replace(/\D/g, '')) || 0
+    return firstDays - secondDays
+  })
+  .slice(0, 4)
 
 function Home() {
   return (
@@ -150,7 +210,7 @@ function Home() {
             </article>
           </div>
 
-          <article className="panel active-alerts-panel" id="historial">
+          {/* <article className="panel active-alerts-panel" id="historial">
             <div className="panel-header">
               <div>
                 <p className="eyebrow">Vencimientos</p>
@@ -172,7 +232,7 @@ function Home() {
                 </div>
               ))}
             </div>
-          </article>
+          </article> */}
         </section>
       </section>
     </main>

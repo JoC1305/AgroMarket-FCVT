@@ -1,0 +1,29 @@
+[
+  {
+    "id": "USR-001",
+    "nombre": "Valeria Cedeño",
+    "email": "admin@agromarket.ec",
+    "rol": "administrador",
+    "telefono": "0991112233",
+    "estado": "activo",
+    "ultimoAcceso": "2026-06-20T08:15:00-05:00"
+  },
+  {
+    "id": "USR-002",
+    "nombre": "Andres Zambrano",
+    "email": "vendedor@agromarket.ec",
+    "rol": "vendedor",
+    "telefono": "0982223344",
+    "estado": "activo",
+    "ultimoAcceso": "2026-06-20T09:05:00-05:00"
+  },
+  {
+    "id": "USR-003",
+    "nombre": "Camila Moreira",
+    "email": "bodega@agromarket.ec",
+    "rol": "bodega",
+    "telefono": "0973334455",
+    "estado": "activo",
+    "ultimoAcceso": "2026-06-19T17:40:00-05:00"
+  }
+]

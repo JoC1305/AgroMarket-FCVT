@@ -1,0 +1,62 @@
+[
+  {
+    "id": "PROV-001",
+    "nombre": "Agroinsumos Manabi",
+    "ruc": "1390012345001",
+    "contacto": "Daniel Vera",
+    "telefono": "052631245",
+    "email": "ventas@agroinsumosmanabi.ec",
+    "direccion": "Av. Reales Tamarindos",
+    "ciudad": "Portoviejo",
+    "categoriaIds": ["CAT-001", "CAT-004"],
+    "estado": "activo"
+  },
+  {
+    "id": "PROV-002",
+    "nombre": "Semillas del Pacifico",
+    "ruc": "0992400112001",
+    "contacto": "Paola Cedeño",
+    "telefono": "042201889",
+    "email": "pedidos@semillaspacifico.ec",
+    "direccion": "Km 12 via Daule",
+    "ciudad": "Guayaquil",
+    "categoriaIds": ["CAT-002"],
+    "estado": "activo"
+  },
+  {
+    "id": "PROV-003",
+    "nombre": "Control Agricola Ecuador",
+    "ruc": "1792200456001",
+    "contacto": "Ricardo Molina",
+    "telefono": "022804455",
+    "email": "comercial@controlec.com",
+    "direccion": "Av. Eloy Alfaro N45",
+    "ciudad": "Quito",
+    "categoriaIds": ["CAT-003", "CAT-007"],
+    "estado": "activo"
+  },
+  {
+    "id": "PROV-004",
+    "nombre": "Viveros La Pradera",
+    "ruc": "1393300458001",
+    "contacto": "Karla Solorzano",
+    "telefono": "052690872",
+    "email": "administracion@lapradera.ec",
+    "direccion": "Via Crucita km 4",
+    "ciudad": "Portoviejo",
+    "categoriaIds": ["CAT-004", "CAT-009"],
+    "estado": "activo"
+  },
+  {
+    "id": "PROV-005",
+    "nombre": "Ferreteria Agricola Nacional",
+    "ruc": "0991345007001",
+    "contacto": "Luis Andrade",
+    "telefono": "043713520",
+    "email": "ventas@fanacional.ec",
+    "direccion": "Av. 25 de Junio",
+    "ciudad": "Machala",
+    "categoriaIds": ["CAT-005", "CAT-006", "CAT-008"],
+    "estado": "activo"
+  }
+]
