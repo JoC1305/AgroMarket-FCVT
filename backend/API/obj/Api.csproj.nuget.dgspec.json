@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\API\\Api.csproj": {}
+    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\API\\Api.csproj": {
+    "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\API\\Api.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj",
         "projectName": "Api",
-        "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\API\\Api.csproj",
+        "projectPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\Api.csproj",
         "packagesPath": "C:\\Users\\ASUS I7\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\API\\obj\\",
+        "outputPath": "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\NuGet.Config",

@@ -15,15 +15,15 @@ using System.Reflection;
     "s\\dcp.exe"))]
 [assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.4.5\\tool" +
     "s\\ext\\"))]
-[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost")]
+[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectname", "backend.AppHost.csproj")]
 [assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", ("C:\\Users\\ASUS I7\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.4.5\\tools\\Aspire" +
     ".Dashboard.exe"))]
-[assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "c:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\obj\\")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "C:\\Users\\ASUS I7\\Desktop\\Agromarket-FCVT\\backend\\backend.AppHost\\obj\\")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("backend.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29b3d5ba853b65ba4bb50fe6e7a428eedcbfae8d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0d48105597d37fdb1e7e9ec6b30b781569203f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("backend.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

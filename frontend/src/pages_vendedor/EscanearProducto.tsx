@@ -19,34 +19,6 @@ type SaleLine = Product & {
   quantity: number
 }
 
-<<<<<<< HEAD
-const mockProducts: Product[] = [
-  {
-    code: '7861009942172',
-    name: 'Fertilizante organico 25 kg',
-    category: 'Fertilizantes',
-    price: 28.5,
-    stock: 12,
-    unit: 'saco',
-  },
-  {
-    code: '7861006801090',
-    name: 'Café oro 48g',
-    category: 'Comestibles',
-    price: 16.75,
-    stock: 8,
-    unit: 'funda',
-  },
-  {
-    code: '7705550011223',
-    name: 'Insecticida foliar 1 L',
-    category: 'Control agricola',
-    price: 12.9,
-    stock: 21,
-    unit: 'botella',
-  },
-]
-=======
 const categorias = categoriasData
 const categoryById = new Map(categorias.map((category) => [category.id, category]))
 
@@ -58,7 +30,6 @@ const products: Product[] = productosData.map((product) => ({
   stock: product.stockActual,
   unit: product.unidad,
 }))
->>>>>>> 0ab063ed77da20f55ddb21bd20ebeab134834b8e
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('es-EC', {
